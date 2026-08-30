@@ -1,0 +1,12 @@
+datos/
+segmentacion/
+*.wav
+*.flac
+*.mp3
+*.TextGrid
+.venv/
+__pycache__/
+*.pyc
+.Rhistory
+.RData
+Thumbs.db
