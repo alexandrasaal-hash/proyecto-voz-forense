@@ -1,0 +1,7 @@
+condicion,grupo,n_pares,n_mismo,n_distinto,Cllr,Cllr_min,EER
+limpio_F1234,solo_mismo_sexo,1428,119,1309,0.667,0.583,0.1864
+limpio_F1234,todos_los_pares,2856,119,2737,0.522,0.452,0.144
+telefono_F123,solo_mismo_sexo,1428,119,1309,0.779,0.723,0.2597
+telefono_F123,todos_los_pares,2856,119,2737,0.637,0.585,0.2039
+cruzado_F123,solo_mismo_sexo,1428,119,1309,0.98,0.949,0.4343
+cruzado_F123,todos_los_pares,2856,119,2737,0.944,0.903,0.4019
