@@ -1,197 +1,61 @@
 # Registro de uso de inteligencia artificial generativa — TFM
 
-Durante el desarrollo de este TFM he utilizado herramientas de inteligencia artificial, principalmente Claude (Anthropic) y ChatGPT (OpenAI), como apoyo en la programación, la resolución de errores, la comprensión de conceptos técnicos, la generación de figuras y tablas y la revisión de textos, incluyendo correcciones ortográficas y mejoras en la claridad de algunas explicaciones.
+Durante la realización de este TFM he utilizado herramientas de inteligencia artificial, principalmente ChatGPT (OpenAI) y Claude (Anthropic), como apoyo en distintas fases del proyecto. Las he utilizado sobre todo para resolver dudas técnicas, ayudarme con la programación en Python y R, detectar y corregir errores, comprender algunos conceptos estadísticos y revisar la redacción de la memoria.
 
-A continuación, se resumen por meses los principales usos de estas herramientas, indicando para qué se utilizaron y cómo se revisaron, adaptaron y comprobaron los resultados obtenidos.
+También me han servido para mejorar explicaciones, organizar información y preparar algunas figuras y tablas. He revisado las propuestas y los resultados obtenidos, adaptándolos al planteamiento y a las necesidades de mi trabajo.
 
----
+A continuación, resumo los principales usos de estas herramientas durante el desarrollo del proyecto.
 
-## Mayo – agosto de 2026
+## Mayo – julio de 2026
 
-**Planificación y estructura del TFM.** Utilicé la IA como apoyo para organizar el trabajo, revisar la estructura de la memoria según la plantilla de la VIU y preparar un plan de trabajo por fases. También me ayudó a elaborar la ilustración del cronograma siguiendo mis indicaciones.
+**Planificación y estructura del TFM.** Utilicé la IA para organizar las tareas, revisar la estructura de la memoria según la plantilla oficial de la VIU y preparar un plan de trabajo por fases. También me ayudó a elaborar la ilustración del cronograma siguiendo mis indicaciones.
 
-**Definición del tema.** La utilicé para comprender mejor algunos conceptos relacionados con la comparación forense de voz y las razones de verosimilitud, así como para aclarar dudas sobre el planteamiento del trabajo a partir de la propuesta de mi tutora y del artículo de López-Escobedo, Huerta-Pacheco y Meza-Ruiz (2025).
+**Definición del tema.** Me ayudó a comprender mejor algunos conceptos relacionados con la comparación forense de voz y las razones de verosimilitud. También la utilicé para resolver dudas sobre el planteamiento del trabajo, tomando como referencia la propuesta de mi tutora y el artículo de López-Escobedo, Huerta-Pacheco y Meza-Ruiz (2025).
 
-**Búsqueda bibliográfica.** Me ayudó a buscar y organizar artículos científicos en español e inglés relacionados con la comparación forense de voz, los formantes y el efecto del canal telefónico, para después consultar las fuentes y seleccionar las referencias que incorporaría a Zotero.
+**Búsqueda bibliográfica.** Utilicé la IA para buscar y organizar artículos científicos en español e inglés relacionados con la comparación forense de voz, los formantes y el efecto del canal telefónico. Después consulté las fuentes y seleccioné las referencias que consideré relevantes para incorporarlas a Zotero.
 
----
+**Preparación del entorno de trabajo.** Me ayudó a instalar y configurar las herramientas necesarias para el proyecto, como Python, R, Git/GitHub, ffmpeg y Zotero, así como a organizar las carpetas y los archivos. Fui siguiendo las instrucciones y comprobando que los programas funcionaran correctamente.
 
-## Septiembre 2026
+**Gestión de referencias en Zotero.** Utilicé la IA para resolver dudas sobre cómo incorporar referencias mediante DOI, corregir fichas bibliográficas y organizar la biblioteca. También me ayudó a preparar `leer_zotero.py`, un programa que permite revisar las referencias guardadas y compararlas con las citas utilizadas en la memoria.
 
-**Entorno de trabajo.** Ayuda para instalar y configurar Python (entorno virtual), R
-(paquete fvclrr), Git/GitHub, ffmpeg y Zotero, y para estructurar las carpetas del
-proyecto.
-Qué hice: ejecuté yo misma cada instalación y cada paso.
+## Agosto – septiembre de 2026
 
-**Gestión de referencias en Zotero.** Ayuda para añadir referencias por DOI/identificador,
-resolver fichas mal importadas y, más adelante, auditar la biblioteca frente a las citas
-usadas en la memoria (script `leer_zotero.py`, que vuelca la colección para comprobar
-qué falta o está mal).
-Qué hice: decidí qué referencias eran relevantes y corregí las fichas señaladas como
-incorrectas.
+**`inventario_corpus.py`.** Utilicé la IA como ayuda para programar el inventario de los corpus OpenSLR (SLR72 de Colombia y SLR73 de Perú). El programa permite identificar los hablantes, su sexo y el número de grabaciones disponibles a partir de los nombres de los archivos y de los índices del corpus (`line_index`). Lo ejecuté y revisé los resultados, obteniendo un total de 71 hablantes disponibles.
 
-**`inventario_corpus.py`.** Script para inventariar los corpus OpenSLR (SLR72 Colombia,
-SLR73 Perú): listar hablantes, sexo y número de grabaciones por hablante a partir de
-los nombres de archivo y los `line_index`.
-Qué hice: lo ejecuté y revisé el resumen (71 hablantes disponibles).
+**`seleccionar_hablantes.py`.** Me ayudó a desarrollar el programa para seleccionar 24 hablantes, 12 mujeres y 12 hombres, y dividir sus grabaciones en dos pseudosesiones (A y B). Se utilizó una semilla fija para que la selección pudiera repetirse. Revisé el código, añadí comentarios sobre las decisiones metodológicas y comprobé que se habían seleccionado correctamente las 1920 grabaciones.
 
-**`seleccionar_hablantes.py`.** Script para elegir 24 hablantes equilibrados por sexo
-(12+12) y dividir cada uno en dos pseudosesiones (A/B), con semilla fija para que la
-selección sea reproducible.
-Qué hice: revisé el código, añadí comentarios propios con las decisiones
-metodológicas, lo ejecuté y comprobé la salida (1920 grabaciones seleccionadas).
+**`procesar_audios.py`.** Utilicé la IA para preparar el código de conversión de las grabaciones mediante ffmpeg, unificando el formato a mono, 16 kHz y 16 bits. Después ejecuté el programa y comprobé que las 1920 grabaciones se habían procesado sin errores.
 
-**`procesar_audios.py`.** Conversión de los 1920 audios seleccionados a formato
-uniforme (mono, 16 kHz, 16 bits) con ffmpeg.
-Qué hice: revisado y ejecutado por mí (1920/1920 sin errores).
+**`degradar_telefono.py`.** Me ayudó a programar la simulación del canal telefónico mediante un filtro paso banda de 300 a 3400 Hz y un remuestreo a 8 kHz. Revisé el funcionamiento del programa y comprobé que se habían generado correctamente las 1920 grabaciones degradadas.
 
-**`degradar_telefono.py`.** Generación de la condición telefónica simulada (paso banda
-300-3400 Hz + remuestreo a 8 kHz) con ffmpeg.
-Qué hice: revisado y ejecutado por mí (1920/1920 sin errores).
+**`segmentar_webmaus.py`.** Inicialmente utilicé la IA para preparar la segmentación fonética mediante WebMAUS, siguiendo el procedimiento del artículo de referencia. Sin embargo, el servicio devolvió errores en todas las peticiones y no se pudo procesar ninguna de las 1920 grabaciones. Ante este problema, decidí buscar una alternativa que pudiera ejecutar de forma local.
 
-**`segmentar_webmaus.py`.** Intento de segmentación fonética con el servicio WebMAUS,
-el mismo método que el paper de referencia. El servicio devolvió un error de ejecución
-en el 100 % de las peticiones (0/1920), por causas del servidor ajenas a este trabajo.
-Qué hice: con esa información, decidí pasar a un método de segmentación local.
+**`extraer_formantes.py`.** Con ayuda de la IA desarrollé un programa con Parselmouth para detectar núcleos vocálicos mediante picos de intensidad en regiones sonoras y extraer F1, F2, F3, F4 y F0 en las grabaciones limpias y telefónicas. También se incorporó una clasificación aproximada de las vocales a partir de F1 y F2. Durante las pruebas surgieron algunos problemas, entre ellos una interrupción del procesamiento, por lo que se modificó el código para guardar los resultados progresivamente y poder continuar sin empezar de nuevo. Finalmente, comprobé que se habían obtenido 14.662 núcleos vocálicos sin errores registrados.
 
-**`extraer_formantes.py`.** Sustituto de WebMAUS: detección local de núcleos vocálicos
-(picos de intensidad sonoros) y extracción de F1-F4/F0 con Parselmouth, en condición
-limpia y telefónica, con clasificación de la vocal por F1-F2. Versión reanudable
-(escritura fila a fila) tras una primera interrupción.
-Qué hice: revisé el método propuesto, lo ejecuté y comprobé los resultados (14.662
-tokens de vocal, 0 errores).
+**`comparar_locutores.py`.** Utilicé la IA como apoyo para desarrollar el sistema de comparación de hablantes mediante regresión logística, a partir de las diferencias entre los formantes de las grabaciones. También me ayudó a implementar la validación *leave-one-speaker-out*, calcular las razones de verosimilitud y las métricas Cllr, Cllr_min y EER, y preparar los gráficos de Tippett. Inicialmente opté por este método debido al tiempo disponible, aunque más adelante incorporé el MVKD como ampliación. Durante las pruebas detecté, con ayuda de la IA, un problema en el cálculo de Cllr_min relacionado con la ponderación de las clases en la recalibración isotónica. Tras corregirlo, comprobé que Cllr_min no superara Cllr en ninguna de las cuatro condiciones analizadas.
 
-**`comparar_locutores.py`.** Sistema de razón de verosimilitud mediante regresión
-logística sobre diferencias de formantes entre pares de grabaciones, validación
-leave-one-speaker-out, cálculo de Cllr/Cllr_min/EER y gráficos de Tippett. Sustituye al
-método MVKD/fvclrr del paper de referencia por restricción de tiempo (decisión
-documentada como comentario en el propio script y como limitación en la memoria).
-Qué hice: detecté y corregí, con ayuda de la IA, un fallo en el cálculo de Cllr_min (la
-recalibración isotónica no ponderaba las clases, dando un resultado imposible:
-Cllr_min > Cllr). Verifiqué que Cllr_min ≤ Cllr en las cuatro condiciones antes de dar
-los resultados por buenos.
+**`graficos.py` y `desglose.py`.** Utilicé la IA para preparar las representaciones gráficas de los resultados, como el espacio vocálico F1-F2, ejemplos de comparaciones entre grabaciones del mismo hablante y de hablantes distintos, y resúmenes de las métricas obtenidas. También me ayudó a programar los análisis por vocal y por sexo, comparando los resultados de todas las parejas con los obtenidos al considerar únicamente parejas del mismo sexo. Revisé los datos y decidí qué resultados y explicaciones incorporar a la memoria.
 
-**`graficos.py` y `desglose.py`.** Visualizaciones adicionales (espacio vocálico F1-F2,
-ejemplo visual mismo/distinto locutor, resumen de métricas) y desglose de resultados
-por vocal y por sexo (comparando todos los pares frente a solo pares del mismo sexo).
-Qué hice: revisé los resultados y decidí qué interpretación dar a los números para la
-memoria.
+**Redacción y revisión de la memoria.** Durante esta fase utilicé ChatGPT y Claude para revisar textos, corregir errores ortográficos y gramaticales, mejorar algunas explicaciones técnicas y trabajar la redacción de distintos apartados. También me ayudaron a resolver dudas sobre cómo presentar los procedimientos y los resultados obtenidos.
 
-**Redacción de la memoria (capítulos 1-6, Resumen, Abstract).** Redacción de un primer
-borrador de la Introducción, Objetivos, Fundamentos y trabajos relacionados, Desarrollo
-del proyecto y resultados (con tablas y figuras incrustadas), Conclusión y trabajos
-futuros, y Referencias, a partir de las lecturas, las decisiones metodológicas y los
-resultados obtenidos durante el proyecto. Ampliación posterior de los capítulos 3 y 4
-para acercar la extensión al mínimo exigido.
-Qué hice: pendiente de una revisión completa por mi parte antes del depósito. Comprobé
-que el documento no quedara roto tras cada cambio (estructura, tablas, figuras,
-índices). El planteamiento, las decisiones metodológicas, el análisis crítico y las
-conclusiones son míos.
+## Octubre de 2026
 
----
+**Revisión del Resumen, Abstract e Introducción.** Utilicé la IA para revisar la redacción, mejorar algunas explicaciones y comprobar la coherencia entre el título, los objetivos y el contenido del trabajo. Me ayudó a detectar imprecisiones en la terminología de fonética acústica y en la explicación de las diferencias entre canales. También señaló que faltaba una referencia para justificar los rangos de F0. Revisé las propuestas y decidí sustituir esos valores por una explicación más general hasta poder comprobar la fuente.
 
-## Octubre 2026
+**`figura_intro.py`.** Utilicé la IA para desarrollar una figura que compara el espectrograma de una misma grabación en condiciones limpia y telefónica simulada, mostrando los formantes y el límite de 3400 Hz. Durante las pruebas se corrigieron algunos errores de representación, como la aparición de formantes en zonas de silencio y un F4 incorrecto en la condición telefónica. Revisé la figura y decidí indicar en su pie que había sido elaborada con apoyo de la IA.
 
-**Revisión de mi redacción (Resumen, Abstract, Introducción).** Pasé a la IA el texto
-que estoy redactando yo a mano en el documento con la plantilla oficial para que lo
-revisara. Señaló imprecisiones técnicas (terminología de fonética acústica, un párrafo
-poco preciso sobre el desafío de la discordancia de canal), incoherencias entre el
-resumen, el título y el trabajo realmente hecho, y la falta de una cita para los rangos
-de F0. A petición mía, aplicó directamente en el documento las correcciones
-acordadas (terminología, tiempos verbales, redacción de las grabaciones propias como
-fase en curso) y sustituyó los rangos de F0 sin fuente por una formulación general,
-dejando un comentario en el documento para añadirlos cuando verifique la referencia.
-Qué hice: decidí qué correcciones aceptar, corregí el título y mantuve la estructura y
-las ideas de mi texto. Pendiente: verificar la cita de F0 y revisar el resto de capítulos.
+**Revisión del capítulo 3 y sus ilustraciones.** Utilicé la IA para revisar los fundamentos teóricos y los trabajos relacionados, corregir errores de terminología y comprobar algunas afirmaciones y referencias bibliográficas. También me ayudó a consultar fuentes como Crossref y las páginas oficiales de la ITU y de la Unión Europea. Para ilustrar el capítulo preparé, con su ayuda, los programas `figura_formantes_banda.py`, `figura_espectro_vocal.py` y `figura_bayes.py`, que permiten representar los formantes respecto a la banda telefónica, el espectro de una vocal y un esquema de la razón de verosimilitud. También me ayudó a preparar una tabla comparativa de métodos. Revisé las figuras y seleccioné las explicaciones y referencias que consideré adecuadas.
 
-**`figura_intro.py`.** Script que genera la figura de la Introducción: espectrograma de
-una misma grabación del corpus en condición limpia y telefónica simulada, con los
-formantes superpuestos y el límite de 3400 Hz. La IA escribió el código y, a partir de
-una primera versión, corrigió dos fallos (formantes dibujados en silencios y un F4
-espurio en el panel telefónico). También insertó la figura, su título y su referencia
-en el texto del documento, y los índices de ilustraciones y de tablas, a petición mía.
-Qué hice: elegí qué mostrar, revisé la figura y decidí indicar en su pie que se ha
-elaborado con apoyo de la IA.
+**Cronograma y diseño experimental.** Utilicé la IA para preparar los programas `figura_cronograma.py` y `figura_diseno.py`, con los que elaboré el cronograma del proyecto y un esquema del procedimiento experimental. También me ayudó a organizar una tabla con las cuatro condiciones de comparación y a incorporar estos elementos al documento con sus títulos y referencias. Revisé las fechas, las fases y el contenido de las figuras para que reflejaran el desarrollo real del trabajo.
 
-**Revisión del Capítulo 3 y sus figuras y tabla.** Con la IA revisé, apartado por
-apartado, los textos del Capítulo 3 (fundamentos y trabajos relacionados) que redacté a
-mano: señaló errores de terminología y de contenido (por ejemplo, una afirmación sobre
-Morrison (2011a) que no era correcta y una novedad del trabajo formulada de forma
-excesiva), comprobó citas y referencias en fuentes (Crossref, páginas oficiales de la
-ITU y de la UE) y añadió las referencias que faltaban a mi biblioteca de Zotero a través
-de su conexión local. Para ilustrar el capítulo generó, con mis datos, los scripts
-`figura_formantes_banda.py` (distribución de F1-F4 frente a la banda telefónica),
-`figura_espectro_vocal.py` (espectro de una vocal con sus formantes) y `figura_bayes.py`
-(esquema de la razón de verosimilitud), y una tabla comparativa de métodos; los insertó
-en el documento con título y referencia cruzada, a petición mía.
-Qué hice: decidí qué figuras y tabla incluir, qué afirmaciones mantener o suavizar
-(incluida la reducción de menciones al trabajo de mi tutora), revisé cada figura y
-mantuve mi redacción como base de todos los textos. Pendiente: leer los artículos que
-cito (Zhang et al., 2013, en particular) y completar los apartados que faltan.
+**Revisión de los apartados 4.2 y 4.3 y del código.** Utilicé la IA para comparar las explicaciones de la memoria con el funcionamiento de los programas y los resultados obtenidos. Me ayudó a detectar errores de terminología, diferencias entre algunas cifras y los datos reales, y descripciones que no coincidían exactamente con el código. Durante esta revisión también se encontró un problema en `comparar_locutores.py`: se estaba corrigiendo dos veces el desequilibrio entre clases, lo que afectaba al valor de Cllr. Tras corregirlo, comprobé que Cllr se aproximaba a Cllr_min y que Cllr_min, EER y el orden de las condiciones se mantenían. Después actualicé los resultados y los gráficos.
 
-**Cronograma y esquema del diseño (apartados 4.1 y 4.2).** La IA generó los scripts
-`figura_cronograma.py` (cronograma por fases con el estado real de cada una) y
-`figura_diseno.py` (esquema ilustrado del diseño experimental, de los datos a las
-métricas), una tabla con las cuatro condiciones de comparación, y los insertó en el
-documento con título y referencia cruzada, ajustando su tamaño y paginación. A petición
-mía, el cronograma refleja lo que realmente hice en cada mes, incluidos los intentos
-fallidos y el trabajo previo a la solicitud formal.
-Qué hice: decidí qué mostrar y cómo (colores, cajas, explicación de cada una),
-corregí las fechas y estados del cronograma, y revisé cada figura hasta darla por buena.
+**Revisión de la clasificación vocálica y de la extracción de formantes.** Al revisar los datos con ayuda de la IA, detecté problemas en la clasificación de algunas vocales, especialmente entre /o/ y /u/. Decidí incorporar la vocal /u/ al análisis y modificar los límites de clasificación en `extraer_formantes.py`, utilizando una frontera de F1 = 450 Hz entre ambas vocales. Esta decisión quedó recogida como una limitación metodológica. También revisé la extracción de formantes en las grabaciones telefónicas, donde se observaron desplazamientos importantes de F2 y F3 al utilizar una configuración de cinco formantes. Tras comparar distintas configuraciones, decidí utilizar cuatro formantes y un techo de análisis de 3900 Hz para la condición telefónica. Con estos cambios se repitió el procesamiento y se actualizaron las cifras, tablas y figuras de la memoria.
 
-**Revisión de los apartados 4.2 y 4.3 y del código.** Redacté yo los apartados 4.2
-(planteamiento) y 4.3 (desarrollo) y pedí a la IA que los comprobara contra el código y
-los datos. Detectó erratas de terminología (razón de probabilidad en vez de verosimilitud,
-tracto vocal, género/sexo), numeración de tablas y cifras o descripciones que no
-coincidían con lo que hacen los scripts (por ejemplo, el punto de medida de los
-formantes o el límite de 3900 Hz en la condición telefónica). Al comparar el texto con
-`comparar_locutores.py` y `desglose.py`, la IA encontró también un error en el código:
-se corregía dos veces el desequilibrio entre clases (ponderación de clases y resta del
-logaritmo de las probabilidades previas), lo que inflaba el Cllr. Verifiqué que, sin la
-resta, el Cllr queda cerca del Cllr_min (calibración correcta), que Cllr_min y EER no
-cambian y que el orden entre condiciones se mantiene; regeneré resultados y gráficos.
-Además, al analizar por qué faltaba la vocal /i/ en una sesión de un hablante, la IA
-midió que la región de /o/ absorbía muestras de /u/ (casi un tercio de las /o/). Decidí
-incluir la /u/ en todo el trabajo: la IA modificó las regiones F1-F2 en
-`extraer_formantes.py` (frontera /o/-/u/ en F1 = 450 Hz, decisión que declaro como
-limitación), repitió la extracción y todos los resultados, y actualizó las cifras del
-Resumen, el Abstract, los Objetivos, el 4.2 y el 4.3.
-Al preparar los resultados (4.4), la IA comparó los formantes de las versiones limpia y
-telefónica de los mismos núcleos vocálicos y vio que, con 5 formantes buscados en la señal
-telefónica, F2 y F3 se desplazaban unas 260 y 830 Hz (más que la variación entre hablantes),
-señal de que el algoritmo asignaba mal los formantes; con 4 formantes el desplazamiento
-casi desaparece. La IA modificó `extraer_formantes.py` (4 formantes en el telefónico,
-techo de 3900 Hz), repitió la extracción y todos los resultados y figuras, y actualizó las
-cifras del Resumen, el Abstract, el 4.3 y la Ilustración 4.
-Qué hice: decidí qué correcciones aceptar, mantuve mi redacción como base, decidí
-incluir la /u/ y usar 4 formantes en el telefónico, y valoré los nuevos resultados antes
-de aceptarlos.
+**Apartado 4.4: resultados y análisis del canal.** Utilicé la IA para organizar los resultados, revisar su interpretación y trabajar la claridad de las explicaciones del apartado. También me ayudó a preparar las tablas y los gráficos mediante `figura_resultados.py`, incluyendo las comparaciones de Cllr, Cllr_min y las curvas de Tippett. Para estudiar mejor el efecto del canal telefónico, utilicé `desglose_canal.py`, que permite comparar las diferencias entre grabaciones del mismo hablante y de hablantes distintos, así como los desplazamientos de F2 y F3 por vocal. También se probó utilizar la mediana en lugar de la media para resumir los formantes, pero no se observaron mejoras y mantuve el procedimiento inicial.
 
-**Apartado 4.4 (Resultados) y diagnóstico del canal.** A petición mía, la IA redactó un
-borrador del apartado 4.4 a partir de los resultados de `metricas.csv` y de los desgloses
-por vocal y por sexo, con un lenguaje sencillo, y lo insertó en el documento con cinco
-tablas y dos figuras (`figura_resultados.py`: barras de Cllr y Cllr_min y curvas de
-Tippett). Para explicar por qué la condición cruzada casi anula la evidencia, la IA
-escribió `desglose_canal.py`, que compara la diferencia entre dos sesiones del mismo
-hablante y de hablantes distintos según el canal, y el desplazamiento de F2 y F3 por vocal;
-también probó, sin adoptarlo, promediar por mediana en vez de por media, que no mejoró el
-resultado.
-Qué hice: pedí el texto, decidí qué apartados mantener (por ejemplo, el desglose por sexo
-breve, a ampliar en 4.5.4) y qué tono usar. Pendiente: revisar y ajustar la redacción.
+**`f0_sexo.py` y análisis del apartado 4.5.4.** Como ampliación del trabajo, utilicé la IA para estudiar la influencia de F0 y del sexo de los hablantes en los resultados. Me ayudó a desarrollar `f0_sexo.py`, que permite incorporar la diferencia de F0 como característica adicional, comparar parejas del mismo sexo y evaluar una clasificación del sexo mediante validación *leave-one-speaker-out*. También me ayudó a preparar las tablas y trabajar las explicaciones de este análisis. Revisé los resultados y decidí cómo presentar las conclusiones y las limitaciones.
 
-**F0 y clasificación del sexo (apartado 4.5.4).** A petición mía, la IA escribió `f0_sexo.py`:
-añade la diferencia de F0 como rasgo del sistema de comparación (con todos los pares y solo con
-parejas del mismo sexo) y clasifica el sexo de cada sesión con validación leave-one-speaker-out.
-También redactó un borrador del apartado 4.5.4 con las dos tablas de resultados y la advertencia de
-que F0 varía más entre días que los formantes.
-Qué hice: pedí ampliar el trabajo con este análisis, revisé los resultados y decidí cómo presentarlos.
-Pendiente: revisar y reescribir el texto con mis palabras.
+**MVKD con el paquete `fvclrr` (apartado 4.5.2).** Utilicé la IA para desarrollar `codigo/r/mvkd_formantes.R`, con el que implementé el método MVKD por vocal mediante el paquete `fvclrr` de R. Durante la programación surgieron problemas de compatibilidad con algunas funciones, por lo que fue necesario adaptar el código. También me ayudó a preparar `codigo/python/mvkd_evaluacion.py`, que permite fusionar las razones de verosimilitud de las cinco vocales mediante regresión logística, aplicar la validación *leave-one-speaker-out* y comparar el MVKD con el sistema inicial. Para que la comparación fuera equivalente, utilicé los mismos 22 hablantes en ambos métodos. Revisé los resultados y trabajé con ayuda de la IA las explicaciones del procedimiento y de la comparación.
 
-**MVKD con el paquete fvclrr (apartado 4.5.2).** A petición mía, la IA escribió `codigo/r/mvkd_formantes.R`
-(MVKD por vocal con el paquete de R fvclrr, en las cuatro condiciones; hubo que usar la función MVKD
-porque MVKD_loop no era compatible con la versión actual de tidyr) y `codigo/python/mvkd_evaluacion.py`
-(fusión de las cinco vocales con regresión logística y leave-one-speaker-out, y comparación con la
-regresión logística sobre los mismos 22 hablantes). También redactó un borrador del apartado 4.5.2.
-Qué hice: pedí la comparación con el MVKD y valoré los resultados antes de incluirlos.
-Pendiente: revisar y reescribir el texto con mis palabras.
-
+**Revisión de la memoria y de los resultados.** A lo largo de octubre seguí utilizando ChatGPT y Claude para corregir errores ortográficos y gramaticales, mejorar la redacción, revisar la coherencia entre apartados y aclarar algunas explicaciones técnicas. También me ayudaron a actualizar tablas, figuras y cifras después de los cambios realizados en el código. En algunos apartados trabajé con sus propuestas de redacción, que revisé y adaptué a los resultados de mi investigación. Quedaron pendientes de comprobación algunas referencias bibliográficas y la revisión final de determinados textos antes de la entrega.
