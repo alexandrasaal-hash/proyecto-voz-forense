@@ -78,4 +78,4 @@ detallado de usos está en [`prompts/README.md`](prompts/README.md).
 
 ## Autora
 
-Alexandra Libin Saal — TFM, Máster Universitario en Big Data y Ciencia de Datos, VIU.
+Alexandra Santamaria Alcaraz — TFM, Máster Universitario en Big Data y Ciencia de Datos, VIU.
