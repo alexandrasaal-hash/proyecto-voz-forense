@@ -34,11 +34,12 @@ FASES = [
     ("Evaluación y análisis\nde los resultados", [(5, 6, "hecho")]),
     ("Redacción del borrador\nde la memoria", [(5, BORRADOR, "curso")]),
     ("Revisión y reescritura\nde la memoria", [(6, DEPOSITO, "curso")]),
-    ("Ampliaciones previstas\n(grabaciones propias, MVKD,\nECAPA-TDNN, F0 y sexo)", [(6, DEPOSITO, "previsto")]),
+    ("Ampliaciones realizadas\n(MVKD, F0 y sexo)", [(6, BORRADOR, "hecho")]),
+    ("Ampliaciones previstas\n(grabaciones propias,\nECAPA-TDNN)", [(6, DEPOSITO, "previsto")]),
 ]
 
 plt.rcParams.update({"font.size": 9.5})
-fig, ax = plt.subplots(figsize=(7.4, 7.2))
+fig, ax = plt.subplots(figsize=(7.4, 7.7))
 n = len(FASES)
 for i, (nombre, tramos) in enumerate(FASES):
     y = n - i

@@ -18,7 +18,7 @@ proyecto-voz-forense/
 ├── datos/            # datos crudos, procesados y telefonicos (no versionados)
 ├── codigo/
 │   ├── python/       # scripts del pipeline, en orden de ejecucion (ver abajo)
-│   └── r/            # fvclrr instalado; pendiente de usar para MVKD (trabajo futuro)
+│   └── r/            # MVKD con el paquete fvclrr (mvkd_formantes.R)
 ├── rasgos/           # formantes extraidos (rasgos/formantes.csv)
 ├── resultados/       # metricas, tablas y figuras
 ├── segmentacion/     # intento fallido de WebMAUS (descartado, ver mas abajo)
@@ -66,9 +66,9 @@ metodológica, pero no forma parte del pipeline final; su sustituto es
 Extracción de formantes (F1–F4) de las vocales /a/, /e/, /i/, /o/, /u/ mediante detección
 acústica local (Parselmouth), y sistema de razón de verosimilitud mediante regresión
 logística sobre diferencias de formantes entre pares de grabaciones, con validación
-leave-one-speaker-out. Sustituye al método MVKD del estudio de referencia por
-restricción de tiempo; una implementación de MVKD con el paquete de R `fvclrr` (ya
-instalado en `codigo/r/`) queda como línea de trabajo futuro para el depósito.
+leave-one-speaker-out. Como comparación, el método MVKD del estudio de referencia se ha
+implementado con el paquete de R `fvclrr` (`codigo/r/mvkd_formantes.R`) y se evalúa con
+`codigo/python/mvkd_evaluacion.py`.
 
 ## Uso de IA generativa
 
