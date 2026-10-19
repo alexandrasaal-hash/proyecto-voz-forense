@@ -1,6 +1,6 @@
 # Registro de uso de inteligencia artificial generativa — TFM
 
-Durante el desarrollo de este TFM he utilizado herramientas de inteligencia artificial, principalmente Claude (Anthropic) y ChatGPT (OpenAI), como apoyo en la programación, la resolución de errores, la comprensión de conceptos técnicos y la revisión de textos, incluyendo correcciones ortográficas y mejoras en la claridad de algunas explicaciones.
+Durante el desarrollo de este TFM he utilizado herramientas de inteligencia artificial, principalmente Claude (Anthropic) y ChatGPT (OpenAI), como apoyo en la programación, la resolución de errores, la comprensión de conceptos técnicos, la generación de figuras y tablas y la revisión de textos, incluyendo correcciones ortográficas y mejoras en la claridad de algunas explicaciones.
 
 A continuación, se resumen por meses los principales usos de estas herramientas, indicando para qué se utilizaron y cómo se revisaron, adaptaron y comprobaron los resultados obtenidos.
 
