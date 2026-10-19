@@ -6,27 +6,13 @@ A continuación, se resumen por meses los principales usos de estas herramientas
 
 ---
 
-## Agosto 2026
+## Mayo – agosto de 2026
 
-**Planificación y estructura del TFM.** Orientación sobre cómo abordar el trabajo:
-estructura de la memoria según la plantilla de la VIU, plan de trabajo por fases,
-lectura de la guía docente y del reglamento del TFM. Se generó un esqueleto de la
-memoria en `.docx` con notas de contenido por sección, y un panel de seguimiento del
-plan de trabajo.
-Qué hice: revisé y adapté la estructura propuesta a mi caso; las decisiones de alcance
-y el plan final son mías.
+**Planificación y estructura del TFM.** Utilicé la IA como apoyo para organizar el trabajo, revisar la estructura de la memoria según la plantilla de la VIU y preparar un plan de trabajo por fases. También me ayudó a elaborar la ilustración del cronograma siguiendo mis indicaciones.
 
-**Definición del tema.** A partir de la conversación con mi tutora, ayuda para entender
-el planteamiento propuesto (comparación forense de voz, marco de razón de
-verosimilitud) y para definir un alcance propio: el efecto de la degradación del canal
-telefónico sobre la fuerza de la evidencia, tomando como referencia el paper de mi
-tutora (López-Escobedo, Huerta-Pacheco y Meza-Ruiz, 2025).
-Qué hice: el tema, el título, los objetivos y el alcance son decisión mía, orientada
-por la propuesta de mi tutora.
+**Definición del tema.** La utilicé para comprender mejor algunos conceptos relacionados con la comparación forense de voz y las razones de verosimilitud, así como para aclarar dudas sobre el planteamiento del trabajo a partir de la propuesta de mi tutora y del artículo de López-Escobedo, Huerta-Pacheco y Meza-Ruiz (2025).
 
-**Lista de lecturas.** Búsqueda y organización de bibliografía relevante en español e
-inglés sobre comparación forense de voz, agrupada por niveles de prioridad.
-Qué hice: leí las fuentes y decidí cuáles añadir a Zotero.
+**Búsqueda bibliográfica.** Me ayudó a buscar y organizar artículos científicos en español e inglés relacionados con la comparación forense de voz, los formantes y el efecto del canal telefónico, para después consultar las fuentes y seleccionar las referencias que incorporaría a Zotero.
 
 ---
 
