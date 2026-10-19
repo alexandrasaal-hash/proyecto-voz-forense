@@ -1,0 +1,7 @@
+canal,rasgos,sesiones,aciertos,exactitud_pct
+limpio,solo F0,48,48,100.0
+limpio,solo F1-F3,48,48,100.0
+limpio,F0 + F1-F3,48,48,100.0
+telefonico,solo F0,48,48,100.0
+telefonico,solo F1-F3,48,45,93.8
+telefonico,F0 + F1-F3,48,47,97.9

@@ -1,0 +1,9 @@
+condicion,rasgos,grupo,n_mismo,n_distinto,Cllr,Cllr_min,EER
+limpio_F1234,formantes,solo_mismo_sexo,119,1309,0.667,0.583,0.1864
+limpio_F1234,formantes + F0,solo_mismo_sexo,119,1309,0.55,0.442,0.1257
+limpio_F123,formantes,solo_mismo_sexo,119,1309,0.736,0.671,0.2261
+limpio_F123,formantes + F0,solo_mismo_sexo,119,1309,0.601,0.521,0.1627
+telefono_F123,formantes,solo_mismo_sexo,119,1309,0.779,0.723,0.2597
+telefono_F123,formantes + F0,solo_mismo_sexo,119,1309,0.647,0.572,0.1925
+cruzado_F123,formantes,solo_mismo_sexo,119,1309,0.98,0.949,0.4343
+cruzado_F123,formantes + F0,solo_mismo_sexo,119,1309,0.753,0.711,0.2594

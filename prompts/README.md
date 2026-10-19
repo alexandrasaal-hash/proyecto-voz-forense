@@ -195,3 +195,19 @@ resultado.
 Qué hice: pedí el texto, decidí qué apartados mantener (por ejemplo, el desglose por sexo
 breve, a ampliar en 4.5.4) y qué tono usar. Pendiente: revisar y ajustar la redacción.
 
+**F0 y clasificación del sexo (apartado 4.5.4).** A petición mía, la IA escribió `f0_sexo.py`:
+añade la diferencia de F0 como rasgo del sistema de comparación (con todos los pares y solo con
+parejas del mismo sexo) y clasifica el sexo de cada sesión con validación leave-one-speaker-out.
+También redactó un borrador del apartado 4.5.4 con las dos tablas de resultados y la advertencia de
+que F0 varía más entre días que los formantes.
+Qué hice: pedí ampliar el trabajo con este análisis, revisé los resultados y decidí cómo presentarlos.
+Pendiente: revisar y reescribir el texto con mis palabras.
+
+**MVKD con el paquete fvclrr (apartado 4.5.2).** A petición mía, la IA escribió `codigo/r/mvkd_formantes.R`
+(MVKD por vocal con el paquete de R fvclrr, en las cuatro condiciones; hubo que usar la función MVKD
+porque MVKD_loop no era compatible con la versión actual de tidyr) y `codigo/python/mvkd_evaluacion.py`
+(fusión de las cinco vocales con regresión logística y leave-one-speaker-out, y comparación con la
+regresión logística sobre los mismos 22 hablantes). También redactó un borrador del apartado 4.5.2.
+Qué hice: pedí la comparación con el MVKD y valoré los resultados antes de incluirlos.
+Pendiente: revisar y reescribir el texto con mis palabras.
+

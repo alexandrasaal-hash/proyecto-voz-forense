@@ -1,0 +1,9 @@
+condicion,sistema,n_mismo,n_distinto,Cllr,Cllr_min,EER
+limpio_F1234,MVKD (fusion de vocales),22,462,0.088,0.025,0.0032
+limpio_F1234,Regresion logistica (diferencias),110,2310,0.537,0.458,0.1359
+limpio_F123,MVKD (fusion de vocales),22,462,0.17,0.062,0.0087
+limpio_F123,Regresion logistica (diferencias),110,2310,0.611,0.552,0.1729
+telefono_F123,MVKD (fusion de vocales),22,462,0.153,0.08,0.04
+telefono_F123,Regresion logistica (diferencias),110,2310,0.615,0.568,0.1939
+cruzado_F123,MVKD (fusion de vocales),22,462,0.922,0.84,0.3442
+cruzado_F123,Regresion logistica (diferencias),110,2310,0.949,0.906,0.3922

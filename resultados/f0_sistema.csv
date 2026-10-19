@@ -1,0 +1,9 @@
+condicion,rasgos,n_mismo,n_distinto,Cllr,Cllr_min,EER
+limpio_F1234,formantes,119,2737,0.522,0.452,0.144
+limpio_F1234,formantes + F0,119,2737,0.4,0.315,0.1049
+limpio_F123,formantes,119,2737,0.602,0.545,0.1765
+limpio_F123,formantes + F0,119,2737,0.427,0.364,0.1027
+telefono_F123,formantes,119,2737,0.637,0.585,0.2039
+telefono_F123,formantes + F0,119,2737,0.456,0.398,0.1189
+cruzado_F123,formantes,119,2737,0.944,0.903,0.4019
+cruzado_F123,formantes + F0,119,2737,0.507,0.476,0.1759
