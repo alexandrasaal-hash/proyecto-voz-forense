@@ -1,10 +1,8 @@
-# Registro de uso de IA generativa — TFM
+# Registro de uso de inteligencia artificial generativa — TFM
 
-Cada entrada agrupa por mes los usos de la herramienta **Claude (Anthropic)** durante
-el desarrollo del TFM: propósito, qué se le pidió (resumen) y qué hice yo con el
-resultado (revisión, adaptación, ejecución, validación). El planteamiento del problema,
-las decisiones metodológicas, el análisis crítico de los resultados y las conclusiones
-son responsabilidad exclusiva mía.
+Durante el desarrollo de este TFM he utilizado herramientas de inteligencia artificial, principalmente Claude (Anthropic) y ChatGPT (OpenAI), como apoyo en la programación, la resolución de errores, la comprensión de conceptos técnicos y la revisión de textos, incluyendo correcciones ortográficas y mejoras en la claridad de algunas explicaciones.
+
+A continuación, se resumen por meses los principales usos de estas herramientas, indicando para qué se utilizaron y cómo se revisaron, adaptaron y comprobaron los resultados obtenidos.
 
 ---
 
