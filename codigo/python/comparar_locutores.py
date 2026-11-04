@@ -22,7 +22,7 @@ import matplotlib.pyplot as plt
 #   sobre |diferencias| de formantes entre pares de grabaciones, siguiendo el
 #   principio de calibracion por regresion logistica de Morrison (2011b).
 #   Simplificacion respecto al metodo de referencia por restriccion de tiempo;
-#   MVKD/fvclrr queda como linea de validacion futura.
+#   MVKD/fvclrr se implemento despues como evaluacion complementaria.
 # - Las 5 vocales (a, e, i, o, u) se combinan como observaciones repetidas del mismo par de
 #   grabaciones (en vez de fusion posterior de sistemas por vocal, como en el
 #   paper de referencia). Diferencia metodologica a declarar.
