@@ -29,22 +29,22 @@ proyecto-voz-forense/
 
 ## Entorno y reproducibilidad
 
-El archivo `requirements.txt` documenta las versiones de nueve paquetes de Python
-observadas en la copia del entorno virtual del proyecto (noviembre de 2026).
-El archivo `pyvenv.cfg` de ese entorno indica Python 3.11.9. Esto documenta el
-entorno disponible actualmente, pero **no demuestra** que todas las métricas
-publicadas se calcularan originalmente con exactamente estas versiones.
+El archivo `requirements.txt` fija las versiones de nueve bibliotecas de Python
+documentadas en el entorno del proyecto (Python 3.11.9). Se han comprobado
+las versiones de **ffmpeg 9.0.1** (compilación gyan.dev), **R 4.5.2** y
+**fvclrr 1.2.0**, así como la disponibilidad de las nueve bibliotecas de Python
+en el entorno original, sin conflictos detectados por `pip check`.
 
-La simulación de audio necesita **ffmpeg** y la evaluación MVKD utiliza **R**
-y el paquete `fvclrr`. En el equipo de trabajo se observaron las versiones
-ffmpeg 9.0.1 (compilación gyan.dev), R 4.5.2 y fvclrr 1.2.0. Estos datos
-fueron comunicados tras una comprobación del entorno, pero no constituyen
-una ejecución independiente del pipeline ni acreditan por sí solos que las
-métricas publicadas se calcularan originalmente con esas versiones.
-Para confirmar el entorno antes de la entrega, registrar las salidas de
-`ffmpeg -version`, `R --version` y `packageVersion("fvclrr")` en R.
-La reproducibilidad completa requiere, además, los corpus originales,
-los archivos intermedios pertinentes y seguir el procedimiento documentado.
+Además, se ha creado un entorno virtual independiente con Python 3.11.9 y se
+han instalado desde cero las nueve dependencias con las versiones fijadas.
+La instalación ha finalizado correctamente, `pip check` no ha encontrado
+conflictos y se han importado satisfactoriamente las nueve bibliotecas.
+Estas pruebas verifican la instalación y el funcionamiento básico del entorno,
+pero **no equivalen a ejecutar el pipeline completo ni demuestran que las métricas
+publicadas se obtuvieran originalmente con esas versiones**. La reproducción
+completa de los resultados experimentales no se ha comprobado; requiere los
+corpus originales, los archivos intermedios pertinentes y la ejecución del
+procedimiento documentado.
 
 Las dependencias del pipeline principal se agrupan en `requirements.txt`.
 `librosa` se conserva para documentar el entorno, pero no es necesaria para los
@@ -52,8 +52,6 @@ scripts principales revisados. El intento de WebMAUS requiere `requests` (su
 versión histórica no consta y no se declara como dependencia del pipeline).
 Las dependencias de ECAPA-TDNN (`torch` y `speechbrain`) se incorporarán
 únicamente cuando el experimento y sus versiones estén comprobados.
-Las versiones fijadas del entorno deben validarse con una instalación de prueba
-antes de afirmar reproducibilidad completa.
 
 ## Datos
 
