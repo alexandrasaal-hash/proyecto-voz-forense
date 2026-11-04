@@ -29,17 +29,31 @@ proyecto-voz-forense/
 
 ## Entorno y reproducibilidad
 
-El archivo `requirements.txt` fija las versiones de nueve dependencias de Python
+El archivo `requirements.txt` documenta las versiones de nueve paquetes de Python
 observadas en la copia del entorno virtual del proyecto (noviembre de 2026).
 El archivo `pyvenv.cfg` de ese entorno indica Python 3.11.9. Esto documenta el
 entorno disponible actualmente, pero **no demuestra** que todas las métricas
 publicadas se calcularan originalmente con exactamente estas versiones.
 
 La simulación de audio necesita **ffmpeg** y la evaluación MVKD utiliza **R**
-y el paquete `fvclrr`. Sus versiones exactas no se han comprobado todavía;
-conviene registrarlas en el entorno de ejecución mediante `ffmpeg -version`
-y `R --version` (y `sessionInfo()` dentro de R). La reproducibilidad completa
-requiere, además, los corpus originales y seguir el procedimiento documentado.
+y el paquete `fvclrr`. En el equipo de trabajo se observaron las versiones
+ffmpeg 9.0.1 (compilación gyan.dev), R 4.5.2 y fvclrr 1.2.0. Estos datos
+fueron comunicados tras una comprobación del entorno, pero no constituyen
+una ejecución independiente del pipeline ni acreditan por sí solos que las
+métricas publicadas se calcularan originalmente con esas versiones.
+Para confirmar el entorno antes de la entrega, registrar las salidas de
+`ffmpeg -version`, `R --version` y `packageVersion("fvclrr")` en R.
+La reproducibilidad completa requiere, además, los corpus originales,
+los archivos intermedios pertinentes y seguir el procedimiento documentado.
+
+Las dependencias del pipeline principal se agrupan en `requirements.txt`.
+`librosa` se conserva para documentar el entorno, pero no es necesaria para los
+scripts principales revisados. El intento de WebMAUS requiere `requests` (su
+versión histórica no consta y no se declara como dependencia del pipeline).
+Las dependencias de ECAPA-TDNN (`torch` y `speechbrain`) se incorporarán
+únicamente cuando el experimento y sus versiones estén comprobados.
+Las versiones fijadas del entorno deben validarse con una instalación de prueba
+antes de afirmar reproducibilidad completa.
 
 ## Datos
 
