@@ -53,6 +53,34 @@ versión histórica no consta y no se declara como dependencia del pipeline).
 Las dependencias de ECAPA-TDNN (`torch` y `speechbrain`) se incorporarán
 únicamente cuando el experimento y sus versiones estén comprobados.
 
+## Evaluación adicional por pareja (opción B, exploratoria)
+
+Como ampliación de la Tabla 8 original, `codigo/python/comparacion_homogenea_B.py`
+calcula una comparación con los mismos 22 hablantes y las mismas 484 parejas
+ordenadas para MVKD y regresión logística (22 del mismo hablante, 462 de
+hablantes distintos). Fusiona la información de las cinco vocales para obtener
+una puntuación por pareja; la normalización y la regresión logística/fusión se
+entrenan con LOSO. **No sustituye ni modifica la Tabla 8 original**.
+
+Ejecución desde la raíz del proyecto, después de generar los archivos de
+rasgos y resultados de MVKD:
+
+```powershell
+.\.venv\Scripts\python.exe codigo/python/comparacion_homogenea_B.py
+```
+
+El script genera `resultados/comparacion_B/comparacion_B_metricas.csv`,
+`comparacion_B_puntuaciones.csv` y dos figuras (`figura_B_cllr_min.png` y
+`figura_B_eer.png`). Las salidas de referencia están archivadas en la carpeta
+`02_Proyecto/resultados/comparacion_B` de Google Drive.
+
+**Limitación:** MVKD parte de puntuaciones precomputadas en R. Aún no se ha
+verificado si el cálculo original de fondo excluye internamente al hablante
+evaluado; por tanto, esta comparación es exploratoria y no debe interpretarse
+como una evaluación forense independiente. El sistema principal y la fusión
+se han reproducido desde `rasgos/formantes.csv` y los archivos intermedios,
+pero no desde los audios originales.
+
 ## Datos
 
 Se emplean los corpus públicos [OpenSLR SLR72](https://www.openslr.org/72/) (español
