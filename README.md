@@ -27,6 +27,20 @@ proyecto-voz-forense/
 └── requirements.txt
 ```
 
+## Entorno y reproducibilidad
+
+El archivo `requirements.txt` fija las versiones de nueve dependencias de Python
+observadas en la copia del entorno virtual del proyecto (noviembre de 2026).
+El archivo `pyvenv.cfg` de ese entorno indica Python 3.11.9. Esto documenta el
+entorno disponible actualmente, pero **no demuestra** que todas las métricas
+publicadas se calcularan originalmente con exactamente estas versiones.
+
+La simulación de audio necesita **ffmpeg** y la evaluación MVKD utiliza **R**
+y el paquete `fvclrr`. Sus versiones exactas no se han comprobado todavía;
+conviene registrarlas en el entorno de ejecución mediante `ffmpeg -version`
+y `R --version` (y `sessionInfo()` dentro de R). La reproducibilidad completa
+requiere, además, los corpus originales y seguir el procedimiento documentado.
+
 ## Datos
 
 Se emplean los corpus públicos [OpenSLR SLR72](https://www.openslr.org/72/) (español
@@ -72,9 +86,11 @@ implementado con el paquete de R `fvclrr` (`codigo/r/mvkd_formantes.R`) y se eva
 
 ## Uso de IA generativa
 
-Este proyecto se ha desarrollado con apoyo de una herramienta de IA generativa
-(Claude, Anthropic), declarado conforme a la normativa del máster. El registro
-detallado de usos está en [`prompts/README.md`](prompts/README.md).
+Este proyecto se ha desarrollado con apoyo de herramientas de IA generativa
+(ChatGPT, OpenAI, y Claude, Anthropic), empleadas para consultas técnicas,
+programación, depuración y revisión de la redacción. Su uso se declara en la
+memoria del TFM, y el registro detallado está en
+[`prompts/README.md`](prompts/README.md).
 
 ## Autora
 
