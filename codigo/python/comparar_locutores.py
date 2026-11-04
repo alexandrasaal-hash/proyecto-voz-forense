@@ -1,6 +1,7 @@
 """Sistema de razon de verosimilitud por regresion logistica sobre diferencias
-de formantes, con validacion leave-one-speaker-out. Sustituye a MVKD/fvclrr
-por restriccion de tiempo (ver nota metodologica).
+de formantes, con validacion leave-one-speaker-out. Se eligio inicialmente como sistema principal por restricciones de tiempo.
+Posteriormente se implemento MVKD/fvclrr como metodo complementario de
+comparacion (ver codigo/r/mvkd_formantes.R y codigo/python/mvkd_evaluacion.py).
 Condiciones: limpio F1-F4, limpio F1-F3, telefono F1-F3, cruzado F1-F3
 (sesion A limpia vs sesion B telefonica: escenario forense realista).
 Salida: resultados/metricas.csv, resultados/tippett_<condicion>.png
