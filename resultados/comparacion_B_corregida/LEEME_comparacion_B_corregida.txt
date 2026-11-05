@@ -1,0 +1,59 @@
+COMPARACIÓN HOMOGÉNEA B — CORRECCIÓN DEL FONDO MVKD (2026-11-05)
+
+Se conserva la versión exploratoria B original y la Tabla 8 histórica.
+La corrección NO reescribe resultados/mvkd_pares.csv ni resultados/comparacion_B.
+
+Objetivo: eliminar la dependencia residual del hablante evaluado en la media global
+precalculada por fvclrr::MVKD y hacer determinista la exclusión del segundo
+hablante del fondo en los casos del mismo hablante.
+
+Código:
+  codigo/python/mvkd_fondo_corregido.py
+  codigo/python/comparacion_homogenea_B_corregida.py
+
+Ejecutar desde el directorio del proyecto:
+  python codigo/python/mvkd_fondo_corregido.py
+  python codigo/python/comparacion_homogenea_B_corregida.py
+
+Datos necesarios:
+  rasgos/formantes.csv
+  resultados/mvkd_hablantes.csv
+
+Nuevas salidas:
+  resultados/mvkd_pares_fondo_corregido_python.csv
+  resultados/comparacion_B_corregida/comparacion_B_metricas.csv
+  resultados/comparacion_B_corregida/comparacion_B_puntuaciones.csv
+  resultados/comparacion_B_corregida/figura_B_cllr_min.png
+  resultados/comparacion_B_corregida/figura_B_eer.png
+
+Se han comprobado 9.240 puntuaciones originales de hablantes distintos:
+9.239 tienen diferencia absoluta < 1.1e-9 respecto a la implementación
+numérica del código de R con media global sin excluir, y 1 caso extremo
+presenta saturación numérica del paquete R (709.78 frente a 17.578 en la
+formulación logarítmica estable). Esto confirma el cálculo de la fórmula
+hasta los límites de representación numérica. La fusión limita las
+puntuaciones a [-30, 30] y este valor extremo queda saturado en ambos casos.
+
+La corrección recalcula la media global, matrices de fondo y el kernel
+únicamente con los hablantes restantes en cada pareja. Para pares del mismo
+hablante, promedia logLR sobre los 21 fondos posibles al excluir un segundo
+hablante. La corrección es una REIMPLEMENTACIÓN NUMÉRICA EN PYTHON de las
+expresiones del paquete fvclrr; NO es una nueva ejecución del paquete R.
+
+En la comparación B, todas las puntuaciones de ambos sistemas se calculan
+sobre 484 parejas ordenadas: 22 del mismo y 462 de distintos hablantes.
+La fusión LOSO elimina de cada entrenamiento las parejas que incluyen al
+hablante evaluado. Se conserva la normalización de datos entrenada dentro
+de cada fold. Para pares de distintos hablantes, los dos scores externos
+se promedian.
+
+RESULTADOS (Cllr_min MVKD corregido vs regresión logística):
+  limpio F1234    0.025 frente a 0.034
+  limpio F123     0.062 frente a 0.066
+  telefónico F123 0.080 frente a 0.198
+  cruzado F123    0.833 frente a 0.520
+
+INTERPRETACIÓN: la corrección no cambia la conclusión sobre degradación
+por discordancia de canal. No se afirma generalización externa a casos
+forenses reales: son pseudosesiones derivadas de las mismas grabaciones.
+No se ha reejecutado todavía el pipeline íntegro desde los audios originales.

@@ -1,0 +1,54 @@
+EVALUACIÓN ADICIONAL HOMOGÉNEA (OPCIÓN B) — TFM
+
+Objetivo: comparar MVKD y regresión logística a nivel de pareja, conservando
+la Tabla 8 original. No se han modificado las salidas originales.
+
+Fuente y unidad de análisis:
+- 22 hablantes (11 mujeres y 11 hombres), mismos identificadores para ambos sistemas.
+- 22 x 22 = 484 parejas ordenadas por condición: 22 mismo hablante y 462 distinto.
+- Cuatro condiciones: limpio F1–F4, limpio F1–F3, telefónico F1–F3 y cruzado F1–F3.
+- Cinco vocales /a,e,i,o,u/ fusionadas a una puntuación por pareja.
+
+Datos de entrada en 02_Proyecto:
+- rasgos/formantes.csv
+- resultados/mvkd_hablantes.csv
+- resultados/mvkd_pares.csv (logLR precomputadas por R)
+
+Código de reproducción:
+- codigo/python/comparacion_homogenea_B.py
+- Desde la raíz del proyecto: python codigo/python/comparacion_homogenea_B.py
+
+Salidas de este directorio:
+- comparacion_B_metricas.csv (8 filas: 4 condiciones x 2 sistemas)
+- comparacion_B_puntuaciones.csv (puntuaciones por pareja)
+- figura_B_cllr_min.png
+- figura_B_eer.png
+
+LOSO: para el entrenamiento de la regresión logística y la fusión se excluyen
+las parejas que contienen al hablante evaluado. La normalización se calcula
+exclusivamente con los datos de entrenamiento. Para pareja de hablantes
+distintos se promedian sus dos puntuaciones fuera de muestra.
+
+LIMITACIÓN MUY IMPORTANTE:
+MVKD utiliza puntuaciones previamente obtenidas en R con bg_speakers = hab,
+y todavía no se ha confirmado si fvclrr excluye internamente al hablante
+cuestionado de la población de fondo al generar cada puntuación. Por tanto,
+la opción B es EXPLORATORIA, no prueba un rendimiento forense independiente.
+La comparación original (Tabla 8) se mantiene sin modificaciones.
+
+VERIFICACIONES REALIZADAS:
+- Conteo y alineación de las 484 parejas en cada condición y sistema.
+- Reejecución del sistema principal desde formantes.csv: 4/4 condiciones
+  reproducen las métricas y las puntuaciones originales (diferencia máxima
+  absoluta de logLR menor que 4e-11; etiquetas idénticas).
+- Reejecución de mvkd_evaluacion.py desde formantes.csv + mvkd_pares.csv:
+  coincide con la Tabla 8.
+- Reejecución independiente del script de opción B: coincide el CSV de métricas.
+
+VERIFICACIONES NO REALIZADAS:
+- Reejecutar todo desde audios crudos.
+- Rehacer la estimación MVKD en R con fondo externo/exclusión explícita.
+- Experimento con grabaciones independientes en días distintos.
+
+No interpretar las mejoras observadas en esta muestra pequeña como
+estimaciones generalizables a casos forenses reales.

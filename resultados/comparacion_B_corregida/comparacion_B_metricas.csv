@@ -1,0 +1,9 @@
+condicion,sistema,hablantes,pares,mismo,distinto,Cllr,Cllr_min,EER
+limpio_F1234,"MVKD, fusion LOSO (fondo recalculado)",22,484,22,462,0.088,0.025,0.0032
+limpio_F1234,"Regresion logistica, cinco vocales por pareja",22,484,22,462,0.091,0.034,0.0076
+limpio_F123,"MVKD, fusion LOSO (fondo recalculado)",22,484,22,462,0.169,0.062,0.0087
+limpio_F123,"Regresion logistica, cinco vocales por pareja",22,484,22,462,0.124,0.066,0.0357
+telefono_F123,"MVKD, fusion LOSO (fondo recalculado)",22,484,22,462,0.153,0.08,0.04
+telefono_F123,"Regresion logistica, cinco vocales por pareja",22,484,22,462,0.287,0.198,0.0812
+cruzado_F123,"MVKD, fusion LOSO (fondo recalculado)",22,484,22,462,0.916,0.833,0.3701
+cruzado_F123,"Regresion logistica, cinco vocales por pareja",22,484,22,462,0.652,0.52,0.2305
