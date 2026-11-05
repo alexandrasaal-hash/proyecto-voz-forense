@@ -74,12 +74,45 @@ El script genera `resultados/comparacion_B/comparacion_B_metricas.csv`,
 `figura_B_eer.png`). Las salidas de referencia están archivadas en la carpeta
 `02_Proyecto/resultados/comparacion_B` de Google Drive.
 
-**Limitación:** MVKD parte de puntuaciones precomputadas en R. Aún no se ha
-verificado si el cálculo original de fondo excluye internamente al hablante
-evaluado; por tanto, esta comparación es exploratoria y no debe interpretarse
-como una evaluación forense independiente. El sistema principal y la fusión
-se han reproducido desde `rasgos/formantes.csv` y los archivos intermedios,
+**Alcance de la versión B original:** las puntuaciones MVKD se calcularon
+previamente con fvclrr (R). Se ha auditado su algoritmo y se ha observado que,
+aunque excluye observaciones de los hablantes evaluados, reutiliza una media
+poblacional calculada antes de esa exclusión. Por ello esta comparación original
+se conserva como referencia exploratoria. El sistema principal y la fusión se
+han reproducido desde `rasgos/formantes.csv` y los archivos intermedios,
 pero no desde los audios originales.
+
+## Comprobación adicional con fondo MVKD corregido
+
+`codigo/python/mvkd_fondo_corregido.py` reconstruye en Python las expresiones
+numéricas de fvclrr y recalcula la media y las matrices del fondo únicamente con
+los hablantes restantes después de excluir a los implicados en cada pareja. En
+las comparaciones del mismo hablante se promedian las 21 posibles exclusiones
+adicionales de otro hablante para evitar aleatoriedad. Se ha contrastado la
+formulación con 9.240 puntuaciones de distintos hablantes del cálculo R original:
+9.239 coinciden con precisión mejor que 1,1 × 10⁻⁹ y una satura en R por límites
+numéricos. La implementación estable usa limitación explícita del rango.
+
+Después, `codigo/python/comparacion_homogenea_B_corregida.py` aplica LOSO a
+la fusión de cinco vocales y a la regresión logística con las mismas 484 parejas
+ordenadas por condición; las nuevas salidas se guardan en
+`resultados/comparacion_B_corregida/`. Para reproducir desde la raíz:
+
+```powershell
+.\.venv\Scripts\python.exe codigo/python/mvkd_fondo_corregido.py
+.\.venv\Scripts\python.exe codigo/python/comparacion_homogenea_B_corregida.py
+```
+
+Cllr_min MVKD corregido frente a regresión logística por pareja:
+- Limpio F1–F4: 0,025 frente a 0,034.
+- Limpio F1–F3: 0,062 frente a 0,066.
+- Telefónico F1–F3: 0,080 frente a 0,198.
+- Cruzado F1–F3: 0,833 frente a 0,520.
+
+Esto es una **evaluación de sensibilidad con implementación independiente en
+Python**, no una ejecución nueva de fvclrr en R ni una validación externa con
+sesiones forenses reales. La Tabla 8 y la primera comparación B se conservan.
+La ejecución completa desde los audios originales sigue sin realizarse.
 
 ## Datos
 
