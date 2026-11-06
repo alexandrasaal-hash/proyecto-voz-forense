@@ -1,0 +1,4 @@
+condicion,sistema,hablantes,pares,mismo,distinto,Cllr,Cllr_min,EER
+limpio,"ECAPA-TDNN (coseno + regresion logistica, LOSO)",22,484,22,462,0.015,0.0,0.0
+telefono,"ECAPA-TDNN (coseno + regresion logistica, LOSO)",22,484,22,462,0.022,0.0,0.0
+cruzado,"ECAPA-TDNN (coseno + regresion logistica, LOSO)",22,484,22,462,0.048,0.022,0.0065

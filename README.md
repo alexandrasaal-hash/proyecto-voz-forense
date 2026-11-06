@@ -5,7 +5,7 @@ Ciencia de Datos (VIU). Evalúa un sistema de comparación forense de voz basado
 formantes vocálicos y razón de verosimilitud, cuantificando el efecto de la
 degradación del canal telefónico (limitación de banda, pérdida del cuarto formante)
 sobre la fuerza de la evidencia, y comparándolo con un sistema de embeddings de red
-neuronal (ECAPA-TDNN, pendiente de incorporar antes del depósito).
+neuronal (ECAPA-TDNN, apartado 4.5.3 de la memoria).
 
 Toma como referencia metodológica el trabajo de López-Escobedo, Huerta-Pacheco y
 Meza-Ruiz (2025), *The Voice of Frida Kahlo? An acoustic–phonetic approach to the case*
@@ -50,8 +50,11 @@ Las dependencias del pipeline principal se agrupan en `requirements.txt`.
 `librosa` se conserva para documentar el entorno, pero no es necesaria para los
 scripts principales revisados. El intento de WebMAUS requiere `requests` (su
 versión histórica no consta y no se declara como dependencia del pipeline).
-Las dependencias de ECAPA-TDNN (`torch` y `speechbrain`) se incorporarán
-únicamente cuando el experimento y sus versiones estén comprobados.
+El extractor de embeddings de ECAPA-TDNN (`codigo/python/ecapa_embeddings.py`) necesita además
+`torch`, `torchaudio` y `speechbrain`, cuyas versiones no se han fijado ni comprobado; no están en
+`requirements.txt`. La evaluación posterior (`codigo/python/ecapa_evaluacion.py`) solo utiliza las
+bibliotecas de `requirements.txt` y parte de los embeddings ya calculados en
+`resultados/ecapa_embeddings.npz`.
 
 ## Evaluación adicional por pareja (opción B, exploratoria)
 
@@ -114,6 +117,41 @@ Python**, no una ejecución nueva de fvclrr en R ni una validación externa con
 sesiones forenses reales. La Tabla 8 y la primera comparación B se conservan.
 La ejecución completa desde los audios originales sigue sin realizarse.
 
+## Evaluación con ECAPA-TDNN y comparación de los tres sistemas (apartado 4.5.3)
+
+`codigo/python/ecapa_embeddings.py` extrae un embedding de 192 dimensiones por grabación y canal
+(limpio y telefónico) con el modelo preentrenado `speechbrain/spkrec-ecapa-voxceleb`, sin
+reentrenarlo, y guarda `resultados/ecapa_embeddings.npz` (1920 grabaciones).
+
+`codigo/python/ecapa_evaluacion.py` usa esos embeddings con el mismo diseño de la comparación por
+pareja: 22 hablantes y 484 parejas. El embedding de cada sesión es la media de los embeddings
+normalizados de sus 40 grabaciones, la puntuación es la similitud coseno entre las sesiones A y B, y
+se convierte en razón de verosimilitud con regresión logística y validación leave-one-speaker-out.
+Ejecución desde cualquier carpeta:
+
+```powershell
+.\.venv\Scripts\python.exe codigo/python/ecapa_evaluacion.py
+```
+
+Salidas en `resultados/comparacion_ecapa/`: `comparacion_tres_sistemas.csv` (Cllr, Cllr_min y EER
+de los tres sistemas), `ecapa_metricas.csv`, `ecapa_puntuaciones.csv`, `ecapa_nivel_grabacion.csv`
+(comprobación sin promediar las 40 grabaciones de cada sesión) y cinco figuras (`figura_tres_sistemas_*.png`
+y `figura_ecapa_distribuciones.png`).
+
+Cllr_min / EER con los mismos 22 hablantes y 484 parejas:
+
+| Condición | Regresión logística | MVKD | ECAPA-TDNN |
+|---|---|---|---|
+| Limpio | 0,066 / 3,6 % | 0,062 / 0,9 % | 0,000 / 0,0 % |
+| Telefónico | 0,198 / 8,1 % | 0,080 / 4,0 % | 0,000 / 0,0 % |
+| Cruzado | 0,520 / 23,1 % | 0,833 / 37,0 % | 0,022 / 0,7 % |
+
+Cautelas: las sesiones A y B son pseudosesiones de un mismo conjunto de grabaciones; la media de 40
+grabaciones por sesión favorece a ECAPA (por grabación individual la EER es de 1,8 %, 5,0 % y 5,0 %);
+y solo hay 22 parejas del mismo hablante, por lo que un Cllr_min de 0 indica separación perfecta en
+esta muestra y no un sistema perfecto. Los formantes y ECAPA-TDNN no usan la misma cantidad de
+información, por lo que no son sistemas equivalentes.
+
 ## Datos
 
 Se emplean los corpus públicos [OpenSLR SLR72](https://www.openslr.org/72/) (español
@@ -141,6 +179,8 @@ aparte y colocarlos en `datos/crudos/openslr72/` y `datos/crudos/openslr73/`.
    6. `codigo/python/comparar_locutores.py` — sistema de razón de verosimilitud y evaluación (Cllr, EER, Tippett)
    7. `codigo/python/desglose.py` — desglose de resultados por vocal y por sexo
    8. `codigo/python/graficos.py` — figuras adicionales para la memoria
+   9. `codigo/python/ecapa_embeddings.py` — embeddings de locutor con ECAPA-TDNN preentrenado (necesita `torch` y `speechbrain`; se tarda un buen rato)
+   10. `codigo/python/ecapa_evaluacion.py` — evaluación de ECAPA-TDNN y comparación con la regresión logística y MVKD (apartado 4.5.3)
 
 `codigo/python/segmentar_webmaus.py` documenta un intento de segmentación con el
 servicio WebMAUS (el mismo método del estudio de referencia), que falló por un error

@@ -1,0 +1,10 @@
+condicion,sistema,Cllr,Cllr_min,EER
+limpio,"Regresion logistica, cinco vocales por pareja",0.124,0.066,0.0357
+limpio,"MVKD, fusion LOSO (fondo recalculado)",0.169,0.062,0.0087
+limpio,"ECAPA-TDNN (coseno + regresion logistica, LOSO)",0.015,0.0,0.0
+telefono,"Regresion logistica, cinco vocales por pareja",0.287,0.198,0.0812
+telefono,"MVKD, fusion LOSO (fondo recalculado)",0.153,0.08,0.04
+telefono,"ECAPA-TDNN (coseno + regresion logistica, LOSO)",0.022,0.0,0.0
+cruzado,"Regresion logistica, cinco vocales por pareja",0.652,0.52,0.2305
+cruzado,"MVKD, fusion LOSO (fondo recalculado)",0.916,0.833,0.3701
+cruzado,"ECAPA-TDNN (coseno + regresion logistica, LOSO)",0.048,0.022,0.0065
