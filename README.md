@@ -178,9 +178,9 @@ Salidas en `resultados/comparacion_ecapa/comprobaciones/`:
 | Archivo | Contenido |
 |---|---|
 | `1_numero_grabaciones.csv` | EER y Cllr con 1, 5, 10, 20 y 40 grabaciones promediadas por sesión (30 sorteos al azar) |
-| `2_intervalos_confianza_hablantes.csv` | Intervalos 95 % del Cllr, Cllr_min y EER remuestreando hablantes (2000 repeticiones) |
+| `2_intervalos_confianza_hablantes.csv` | Intervalos 95 % aproximados del Cllr, Cllr_min y EER remuestreando hablantes (2000 repeticiones); las parejas entre copias de un mismo hablante no se contabilizan como nuevas parejas positivas |
 | `3_etiquetas_barajadas.csv` | Control con identidades permutadas repitiendo el procedimiento completo, validación LOSO incluida (500 permutaciones) |
-| `4_diferencias_pareadas.csv` | Intervalos 95 % de la diferencia entre sistemas, con los mismos remuestreos |
+| `4_diferencias_pareadas.csv` | Intervalos 95 % aproximados de la diferencia entre sistemas, con los mismos remuestreos (mismas parejas en cada remuestreo) |
 | `5_permutaciones_puntuaciones_guardadas.csv` | Permutación de identidades sobre las puntuaciones ya calculadas, sin reentrenar (2000 permutaciones) |
 | `6_permutaciones_variante_sin_parejas_reales.csv` | Variante de la anterior sin las 22 parejas reales en la distribución nula |
 

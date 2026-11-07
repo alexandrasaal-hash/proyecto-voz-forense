@@ -3,6 +3,7 @@ Entradas: resultados/ecapa_embeddings.npz, resultados/mvkd_hablantes.csv, result
           resultados/comparacion_B_corregida/comparacion_B_puntuaciones.csv
   1) efecto del numero de grabaciones promediadas por sesion (1, 5, 10, 20, 40)             -> 1_numero_grabaciones.csv
   2) intervalos de confianza 95 % remuestreando HABLANTES (ECAPA, regresion logistica, MVKD) -> 2_intervalos_confianza_hablantes.csv
+     (si un hablante sale repetido, se excluyen las parejas entre sus copias: cada posicion aporta una sola pareja positiva)
   3) control con etiquetas barajadas por hablante (procedimiento completo, 500 permutaciones) -> 3_etiquetas_barajadas.csv
   4) intervalos 95 % de la diferencia pareada entre sistemas                                -> 4_diferencias_pareadas.csv
   5) permutacion de identidades sobre las puntuaciones guardadas de cada sistema (2000)     -> 5_permutaciones_puntuaciones_guardadas.csv
@@ -131,12 +132,23 @@ B = 2000
 M = lambda v: np.asarray(v).reshape(22, 22)
 
 
+def remuestra(M, b):
+    """Remuestreo por hablante (posiciones b, con repeticion). Cada posicion aporta UNA pareja del mismo hablante (la diagonal);
+    las parejas entre dos copias del mismo hablante se excluyen (serian la misma pareja positiva repetida) y el resto son
+    parejas de hablantes distintos. Devuelve puntuaciones y etiquetas (1 = mismo hablante).
+    Cada remuestreo tiene siempre 22 parejas positivas; el numero de parejas negativas varia (484 - suma de k^2, con k = veces que sale cada
+    hablante), y una pareja de hablantes distintos (i, j) aparece k_i * k_j veces. Los sistemas se comparan siempre sobre las mismas parejas."""
+    m = M[np.ix_(b, b)]
+    diag = np.eye(len(b), dtype=bool)
+    keep = diag | ~(b[:, None] == b[None, :])
+    return m[keep], diag[keep].astype(int)
+
+
 def ic(score_mat, rng):
     out = []
     for _ in range(B):
         b = rng.integers(0, 22, 22)
-        s = score_mat[np.ix_(b, b)].ravel()
-        lab = (b[:, None] == b[None, :]).ravel().astype(int)
+        s, lab = remuestra(score_mat, b)
         out.append((cllr(s, lab), cmin(s, lab), eer(s, lab)))
     o = np.array(out)
     return np.percentile(o, [2.5, 97.5], axis=0), o.mean(axis=0)
@@ -225,8 +237,7 @@ for cond in CF:
     for a, b in (("ECAPA", "LR"), ("ECAPA", "MVKD"), ("LR", "MVKD")):
         dc, de = [], []
         for bb in boots:
-            lab = (bb[:, None] == bb[None, :]).ravel().astype(int)
-            sa = S[(cond, a)][np.ix_(bb, bb)].ravel(); sb = S[(cond, b)][np.ix_(bb, bb)].ravel()
+            sa, lab = remuestra(S[(cond, a)], bb); sb, _ = remuestra(S[(cond, b)], bb)
             dc.append(cmin(sa, lab) - cmin(sb, lab)); de.append(eer(sa, lab) - eer(sb, lab))
         pc = cmin(S[(cond, a)].ravel(), y) - cmin(S[(cond, b)].ravel(), y)
         pe = eer(S[(cond, a)].ravel(), y) - eer(S[(cond, b)].ravel(), y)
