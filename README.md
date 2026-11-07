@@ -5,7 +5,7 @@ Ciencia de Datos (VIU). Evalúa un sistema de comparación forense de voz basado
 formantes vocálicos y razón de verosimilitud, cuantificando el efecto de la
 degradación del canal telefónico (limitación de banda, pérdida del cuarto formante)
 sobre la fuerza de la evidencia, y comparándolo con un sistema de embeddings de red
-neuronal (ECAPA-TDNN, apartado 4.5.3 de la memoria).
+neuronal (ECAPA-TDNN, apartado 4.5.2 de la memoria).
 
 Toma como referencia metodológica el trabajo de López-Escobedo, Huerta-Pacheco y
 Meza-Ruiz (2025), *The Voice of Frida Kahlo? An acoustic–phonetic approach to the case*
@@ -22,7 +22,7 @@ proyecto-voz-forense/
 ├── rasgos/           # formantes extraidos (rasgos/formantes.csv)
 ├── resultados/       # metricas, tablas y figuras
 ├── segmentacion/     # intento fallido de WebMAUS (descartado, ver mas abajo)
-├── memoria/          # memoria del TFM
+├── memoria/          # memoria del TFM (no se incluye en el repositorio)
 ├── prompts/          # registro de uso de IA generativa
 └── requirements.txt
 ```
@@ -117,7 +117,7 @@ Python**, no una ejecución nueva de fvclrr en R ni una validación externa con
 sesiones forenses reales. La Tabla 8 y la primera comparación B se conservan.
 La ejecución completa desde los audios originales sigue sin realizarse.
 
-## Evaluación con ECAPA-TDNN y comparación de los tres sistemas (apartado 4.5.3)
+## Evaluación con ECAPA-TDNN y comparación de los tres sistemas (apartado 4.5.2)
 
 `codigo/python/ecapa_embeddings.py` extrae un embedding de 192 dimensiones por grabación y canal
 (limpio y telefónico) con el modelo preentrenado `speechbrain/spkrec-ecapa-voxceleb`, sin
@@ -180,7 +180,8 @@ aparte y colocarlos en `datos/crudos/openslr72/` y `datos/crudos/openslr73/`.
    7. `codigo/python/desglose.py` — desglose de resultados por vocal y por sexo
    8. `codigo/python/graficos.py` — figuras adicionales para la memoria
    9. `codigo/python/ecapa_embeddings.py` — embeddings de locutor con ECAPA-TDNN preentrenado (necesita `torch` y `speechbrain`; se tarda un buen rato)
-   10. `codigo/python/ecapa_evaluacion.py` — evaluación de ECAPA-TDNN y comparación con la regresión logística y MVKD (apartado 4.5.3)
+   10. `codigo/python/ecapa_evaluacion.py` — evaluación de ECAPA-TDNN y comparación con la regresión logística y MVKD (apartado 4.5.2)
+   11. `codigo/python/figura_violin_hablante.py` — gráficos de violín de F1–F4 de una mujer y de un hombre, en limpio y telefónico (apartado 4.4.1); el criterio de elección de los hablantes está explicado al inicio del programa
 
 `codigo/python/segmentar_webmaus.py` documenta un intento de segmentación con el
 servicio WebMAUS (el mismo método del estudio de referencia), que falló por un error

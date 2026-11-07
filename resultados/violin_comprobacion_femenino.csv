@@ -1,0 +1,13 @@
+hablante,corpus,nucleos_total,nucleos_min_por_vocal,distancia_a_la_mediana,cumple_minimo,rango
+pef_00610,SLR73,715,42,0.0094,True,1
+cof_06136,SLR72,572,31,0.0184,True,2
+cof_03034,SLR72,459,33,0.0376,True,3
+pef_02484,SLR73,552,45,0.0384,True,4
+pef_05223,SLR73,641,42,0.0384,True,5
+pef_02121,SLR73,710,32,0.0396,True,6
+pef_09334,SLR73,574,56,0.0511,True,7
+pef_01208,SLR73,637,39,0.0608,True,8
+cof_08421,SLR72,494,47,0.0984,True,9
+cof_09697,SLR72,639,21,0.0314,False,10
+cof_00610,SLR72,780,23,0.0334,False,11
+cof_05223,SLR72,737,11,0.0426,False,12

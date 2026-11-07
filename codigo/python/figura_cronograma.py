@@ -1,4 +1,4 @@
-﻿"""Figura del apartado 4.1: cronograma del trabajo por fases (abril-noviembre de 2026) con las fechas
+"""Figura del apartado 4.1: cronograma del trabajo por fases (abril-noviembre de 2026) con las fechas
 oficiales de entrega del Periodo 3: borrador 19/10, deposito 09/11 y defensa 16-27/11.
 Fechas documentadas: solicitud de tema y tutorizacion (documentos de 19-24/04), inicio del trabajo tecnico
 (29-30/08). Junio-julio: busqueda de informacion y lectura, segun la autora.
@@ -34,12 +34,11 @@ FASES = [
     ("Evaluación y análisis\nde los resultados", [(5, 6, "hecho")]),
     ("Redacción del borrador\nde la memoria", [(5, BORRADOR, "curso")]),
     ("Revisión y reescritura\nde la memoria", [(6, DEPOSITO, "curso")]),
-    ("Ampliaciones realizadas\n(MVKD, F0 y sexo)", [(6, BORRADOR, "hecho")]),
-    ("Ampliaciones previstas\n(grabaciones propias,\nECAPA-TDNN)", [(6, DEPOSITO, "previsto")]),
+    ("Ampliaciones realizadas\n(MVKD, ECAPA-TDNN,\nF0 y sexo)", [(6, x_dia(7, 5, 30), "hecho")]),
 ]
 
 plt.rcParams.update({"font.size": 9.5})
-fig, ax = plt.subplots(figsize=(7.4, 7.7))
+fig, ax = plt.subplots(figsize=(7.4, 7.2))
 n = len(FASES)
 for i, (nombre, tramos) in enumerate(FASES):
     y = n - i
@@ -77,9 +76,8 @@ for s in ("right", "bottom", "left"):
     ax.spines[s].set_visible(False)
 ax.legend(handles=[Patch(fc=COL["hecho"], ec=BORDE, label="Realizado"),
                    Patch(fc=COL["intento"], ec=BORDE, hatch="..", label="Primeros intentos"),
-                   Patch(fc=COL["curso"], ec=BORDE, label="En curso"),
-                   Patch(fc="white", ec=BORDE, hatch="//", label="Previsto")],
-          loc="upper center", bbox_to_anchor=(0.5, -0.01), ncol=4, frameon=False)
+                   Patch(fc=COL["curso"], ec=BORDE, label="En curso")],
+          loc="upper center", bbox_to_anchor=(0.5, -0.01), ncol=3, frameon=False)
 fig.tight_layout()
 fig.savefig("resultados/figura_cronograma.png", dpi=200)
 print("Guardado: resultados/figura_cronograma.png")
