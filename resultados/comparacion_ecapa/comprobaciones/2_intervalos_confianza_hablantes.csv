@@ -1,0 +1,10 @@
+condicion,sistema,Cllr,Cllr_IC_inf,Cllr_IC_sup,Cllr_min,Cllr_min_IC_inf,Cllr_min_IC_sup,EER,EER_IC_inf,EER_IC_sup
+limpio,ECAPA-TDNN,0.0148,0.0077,0.03,0.0,0.0,0.0,0.0,0.0,0.0
+limpio,"MVKD, fusion LOSO (fondo recalculado)",0.1686,0.1115,0.2558,0.0618,0.0,0.1259,0.0087,0.0,0.0409
+limpio,"Regresion logistica, cinco vocales por pareja",0.124,0.0659,0.2126,0.0656,0.0,0.1073,0.0357,0.0,0.0374
+telefono,ECAPA-TDNN,0.0224,0.0125,0.0398,0.0,0.0,0.0,0.0,0.0,0.0
+telefono,"MVKD, fusion LOSO (fondo recalculado)",0.1528,0.0937,0.2292,0.08,0.0089,0.1311,0.04,0.0011,0.0696
+telefono,"Regresion logistica, cinco vocales por pareja",0.2867,0.1069,0.8052,0.1984,0.0412,0.273,0.0812,0.0102,0.206
+cruzado,ECAPA-TDNN,0.0484,0.0125,0.1196,0.0223,0.0,0.0513,0.0065,0.0,0.026
+cruzado,"MVKD, fusion LOSO (fondo recalculado)",0.9157,0.796,1.0572,0.833,0.6304,0.8709,0.3701,0.2388,0.5307
+cruzado,"Regresion logistica, cinco vocales por pareja",0.6516,0.4579,0.8997,0.5202,0.336,0.5675,0.2305,0.1125,0.3318

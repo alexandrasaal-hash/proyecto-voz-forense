@@ -1,0 +1,4 @@
+condicion,permutaciones,EER_observada,EER_barajada_media,EER_barajada_min,EER_barajada_p2_5,Cllr_min_observada,Cllr_min_barajada_media,Cllr_min_barajada_min,Cllr_barajada_media,permutaciones_con_EER_menor_o_igual_que_la_observada
+limpio,500,0.0,0.4939,0.3236,0.3717,0.0,0.9567,0.8141,1.0005,0
+telefono,500,0.0,0.5024,0.3106,0.378,0.0,0.964,0.8313,1.0041,0
+cruzado,500,0.0065,0.497,0.3323,0.39,0.0223,0.961,0.8385,1.003,0

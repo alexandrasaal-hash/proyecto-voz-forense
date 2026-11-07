@@ -51,10 +51,12 @@ Las dependencias del pipeline principal se agrupan en `requirements.txt`.
 scripts principales revisados. El intento de WebMAUS requiere `requests` (su
 versión histórica no consta y no se declara como dependencia del pipeline).
 El extractor de embeddings de ECAPA-TDNN (`codigo/python/ecapa_embeddings.py`) necesita además
-`torch`, `torchaudio` y `speechbrain`, cuyas versiones no se han fijado ni comprobado; no están en
-`requirements.txt`. La evaluación posterior (`codigo/python/ecapa_evaluacion.py`) solo utiliza las
-bibliotecas de `requirements.txt` y parte de los embeddings ya calculados en
-`resultados/ecapa_embeddings.npz`.
+`torch`, `torchaudio` y `speechbrain`. Sus versiones (las del entorno virtual con el que se extrajeron los
+embeddings) están en `requirements-ecapa.txt`, que se instala **en un entorno aparte** y no forma parte de
+`requirements.txt` (torch es pesado). La evaluación posterior (`codigo/python/ecapa_evaluacion.py`) solo
+utiliza las bibliotecas de `requirements.txt` (entre ellas matplotlib, para las figuras) y las comprobaciones
+adicionales (`codigo/python/comprobaciones_ecapa.py`) solo numpy, pandas y scikit-learn; ambas parten de los
+embeddings ya calculados en `resultados/ecapa_embeddings.npz`.
 
 ## Evaluación adicional por pareja (opción B, exploratoria)
 
@@ -152,6 +154,57 @@ y solo hay 22 parejas del mismo hablante, por lo que un Cllr_min de 0 indica sep
 esta muestra y no un sistema perfecto. Los formantes y ECAPA-TDNN no usan la misma cantidad de
 información, por lo que no son sistemas equivalentes.
 
+### Comprobaciones adicionales de ECAPA-TDNN (apartado 4.5.2)
+
+`codigo/python/comprobaciones_ecapa.py` reúne las comprobaciones que refuerzan la lectura de los resultados
+de ECAPA-TDNN (sección «Comprobaciones adicionales del rendimiento de ECAPA-TDNN» de la memoria). **No usa los
+audios**: parte de los embeddings y de las puntuaciones ya calculadas.
+
+Entradas: `resultados/ecapa_embeddings.npz`, `resultados/mvkd_hablantes.csv`,
+`resultados/comparacion_ecapa/ecapa_puntuaciones.csv` y
+`resultados/comparacion_B_corregida/comparacion_B_puntuaciones.csv`.
+
+Ejecución desde la raíz del proyecto, en el entorno de `requirements-ecapa.txt` (el mismo con el que se
+generaron los CSV):
+
+```powershell
+py -m venv .venv-ecapa
+.\.venv-ecapa\Scripts\python.exe -m pip install -r requirements-ecapa.txt
+.\.venv-ecapa\Scripts\python.exe codigo/python/comprobaciones_ecapa.py
+```
+
+Salidas en `resultados/comparacion_ecapa/comprobaciones/`:
+
+| Archivo | Contenido |
+|---|---|
+| `1_numero_grabaciones.csv` | EER y Cllr con 1, 5, 10, 20 y 40 grabaciones promediadas por sesión (30 sorteos al azar) |
+| `2_intervalos_confianza_hablantes.csv` | Intervalos 95 % del Cllr, Cllr_min y EER remuestreando hablantes (2000 repeticiones) |
+| `3_etiquetas_barajadas.csv` | Control con identidades permutadas repitiendo el procedimiento completo, validación LOSO incluida (500 permutaciones) |
+| `4_diferencias_pareadas.csv` | Intervalos 95 % de la diferencia entre sistemas, con los mismos remuestreos |
+| `5_permutaciones_puntuaciones_guardadas.csv` | Permutación de identidades sobre las puntuaciones ya calculadas, sin reentrenar (2000 permutaciones) |
+| `6_permutaciones_variante_sin_parejas_reales.csv` | Variante de la anterior sin las 22 parejas reales en la distribución nula |
+
+Todas las semillas aleatorias son fijas y están documentadas al inicio del programa. Las permutaciones se
+generan sin puntos fijos (ningún hablante conserva su pareja real) y el p empírico es
+(1 + n.º de permutaciones tan buenas o mejores que la real) / (n.º de permutaciones + 1); con 2000
+permutaciones, el menor valor estimable es 1/2001 ≈ 0,0005.
+
+**Dos niveles de reproducibilidad, que no deben confundirse:**
+
+1. *Repetir las comprobaciones desde los embeddings guardados* (lo anterior). Comprobado: una ejecución en
+   una carpeta limpia, con solo las cuatro entradas, reproduce los seis CSV byte a byte.
+2. *Reproducir la extracción de los embeddings desde los audios* (`ecapa_embeddings.py`, que requiere los datos
+   de `03_Datos` y el entorno de `requirements-ecapa.txt`). Solo se ha comprobado parcialmente: ocho embeddings
+   recalculados (cuatro grabaciones, en limpio y telefónico) coinciden exactamente con los guardados
+   (diferencia máxima 0). No se ha repetido la extracción completa de las 1920 grabaciones ni el pipeline desde
+   los audios originales.
+
+En `requirements-ecapa.txt`, `torch` y `torchaudio` figuran con las versiones del entorno original
+(2.14.1 y 2.11.0); `torchaudio` no declara una dependencia estricta de `torch`, de modo que la combinación se ha
+verificado solo en ese entorno (`pip check` sin conflictos, importación y remuestreo correctos y embeddings
+idénticos). Que las comprobaciones sean reproducibles no elimina las limitaciones del diseño (pseudosesiones,
+22 hablantes, canal telefónico simulado).
+
 ## Datos
 
 Se emplean los corpus públicos [OpenSLR SLR72](https://www.openslr.org/72/) (español
@@ -179,9 +232,10 @@ aparte y colocarlos en `datos/crudos/openslr72/` y `datos/crudos/openslr73/`.
    6. `codigo/python/comparar_locutores.py` — sistema de razón de verosimilitud y evaluación (Cllr, EER, Tippett)
    7. `codigo/python/desglose.py` — desglose de resultados por vocal y por sexo
    8. `codigo/python/graficos.py` — figuras adicionales para la memoria
-   9. `codigo/python/ecapa_embeddings.py` — embeddings de locutor con ECAPA-TDNN preentrenado (necesita `torch` y `speechbrain`; se tarda un buen rato)
+   9. `codigo/python/ecapa_embeddings.py` — embeddings de locutor con ECAPA-TDNN preentrenado (necesita `torch`, `torchaudio` y `speechbrain`: entorno aparte con `requirements-ecapa.txt`; se tarda un buen rato)
    10. `codigo/python/ecapa_evaluacion.py` — evaluación de ECAPA-TDNN y comparación con la regresión logística y MVKD (apartado 4.5.2)
    11. `codigo/python/figura_violin_hablante.py` — gráficos de violín de F1–F4 de una mujer y de un hombre, en limpio y telefónico (apartado 4.4.1); el criterio de elección de los hablantes está explicado al inicio del programa
+   12. `codigo/python/comprobaciones_ecapa.py` — comprobaciones adicionales de ECAPA-TDNN: número de grabaciones, intervalos de confianza por hablante y controles con identidades permutadas (apartado 4.5.2); parte de los embeddings guardados
 
 `codigo/python/segmentar_webmaus.py` documenta un intento de segmentación con el
 servicio WebMAUS (el mismo método del estudio de referencia), que falló por un error

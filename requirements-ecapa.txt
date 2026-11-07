@@ -1,0 +1,15 @@
+# Entorno de ECAPA-TDNN: extraccion de embeddings (codigo/python/ecapa_embeddings.py) y
+# comprobaciones adicionales (codigo/python/comprobaciones_ecapa.py). Python 3.11.9, Windows.
+# Versiones del entorno virtual con el que se extrajeron los embeddings (instalado el 19-oct-2026);
+# `pip check` sin conflictos. En Windows, PyPI instala las compilaciones CPU (torch 2.14.1+cpu, torchaudio 2.11.0+cpu).
+# Instalar en un entorno aparte (no mezclar con requirements.txt):
+#   py -m venv .venv-ecapa
+#   .\.venv-ecapa\Scripts\python.exe -m pip install -r requirements-ecapa.txt
+torch==2.14.1
+torchaudio==2.11.0
+speechbrain==1.1.2
+numpy==2.4.6
+pandas==3.0.6
+scipy==1.17.1
+scikit-learn==1.9.1
+soundfile==0.14.0
