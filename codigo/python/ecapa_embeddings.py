@@ -1,4 +1,4 @@
-"""Apartado 4.5.3: embeddings de locutor con un modelo ECAPA-TDNN preentrenado (SpeechBrain, spkrec-ecapa-voxceleb).
+"""Apartado 4.5.2: embeddings de locutor con un modelo ECAPA-TDNN preentrenado (SpeechBrain, spkrec-ecapa-voxceleb).
 Un embedding por grabacion y canal (limpio 16 kHz; telefonico 8 kHz remuestreado a 16 kHz).
 Salida: resultados/ecapa_embeddings.npz
 Uso (entorno con torch y speechbrain):  python codigo/python/ecapa_embeddings.py [n_max]

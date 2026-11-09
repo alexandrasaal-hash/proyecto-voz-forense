@@ -14,5 +14,4 @@ librosa==0.11.0
 # WebMAUS: intento descartado, no forma parte del pipeline reproducible
 # requests (versión utilizada no verificada; no se instala desde este archivo)
 
-# ECAPA-TDNN: pendiente de completar y validar
-# torch y speechbrain (versiones por confirmar; no se instalan desde este archivo)
+# ECAPA-TDNN: entorno aparte, ver requirements-ecapa.txt (no se instala desde este archivo)

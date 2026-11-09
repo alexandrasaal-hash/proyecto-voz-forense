@@ -1,9 +1,9 @@
-"""Apartado 4.5.3: evaluacion del sistema ECAPA-TDNN y comparacion con los otros dos sistemas.
+"""Apartado 4.5.2: evaluacion del sistema ECAPA-TDNN y comparacion con los otros dos sistemas.
 
 Entrada (no se modifica nada):
   resultados/ecapa_embeddings.npz            embeddings ECAPA-TDNN de las 1920 grabaciones (limpio y telefonico),
                                              calculados con codigo/python/ecapa_embeddings.py
-  resultados/mvkd_hablantes.csv              los 22 hablantes de la comparacion por pareja (apartado 4.5.2)
+  resultados/mvkd_hablantes.csv              los 22 hablantes de la comparacion por pareja (apartado 4.5.1)
   resultados/comparacion_B_corregida/comparacion_B_metricas.csv    MVKD (fondo corregido) y regresion logistica
   resultados/comparacion_B_corregida/comparacion_B_puntuaciones.csv
 
@@ -59,7 +59,7 @@ def eer(s, y):
 
 
 def loso_score(X, y, sus, off, hab):
-    """un score por pareja del mismo hablante y la media de dos para las de hablantes distintos (como en 4.5.2)"""
+    """un score por pareja del mismo hablante y la media de dos para las de hablantes distintos (como en 4.5.1)"""
     acc = [[] for _ in y]
     for sp in hab:
         train = (sus != sp) & (off != sp)

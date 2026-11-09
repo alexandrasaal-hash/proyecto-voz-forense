@@ -60,12 +60,12 @@ embeddings ya calculados en `resultados/ecapa_embeddings.npz`.
 
 ## Evaluación adicional por pareja (opción B, exploratoria)
 
-Como ampliación de la Tabla 8 original, `codigo/python/comparacion_homogenea_B.py`
+Como ampliación de la Tabla 9 original, `codigo/python/comparacion_homogenea_B.py`
 calcula una comparación con los mismos 22 hablantes y las mismas 484 parejas
 ordenadas para MVKD y regresión logística (22 del mismo hablante, 462 de
 hablantes distintos). Fusiona la información de las cinco vocales para obtener
 una puntuación por pareja; la normalización y la regresión logística/fusión se
-entrenan con LOSO. **No sustituye ni modifica la Tabla 8 original**.
+entrenan con LOSO. **No sustituye ni modifica la Tabla 9 original**.
 
 Ejecución desde la raíz del proyecto, después de generar los archivos de
 rasgos y resultados de MVKD:
@@ -116,7 +116,7 @@ Cllr_min MVKD corregido frente a regresión logística por pareja:
 
 Esto es una **evaluación de sensibilidad con implementación independiente en
 Python**, no una ejecución nueva de fvclrr en R ni una validación externa con
-sesiones forenses reales. La Tabla 8 y la primera comparación B se conservan.
+sesiones forenses reales. La Tabla 9 y la primera comparación B se conservan.
 La ejecución completa desde los audios originales sigue sin realizarse.
 
 ## Evaluación con ECAPA-TDNN y comparación de los tres sistemas (apartado 4.5.2)
