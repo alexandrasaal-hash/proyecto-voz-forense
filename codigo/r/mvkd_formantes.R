@@ -1,4 +1,4 @@
-# Apartado 4.5.2: sistema MVKD (Aitken y Lucy, 2004) con el paquete fvclrr, por vocal, en las cuatro condiciones.
+# Apartado 4.5.1: sistema MVKD (Aitken y Lucy, 2004) con el paquete fvclrr, por vocal, en las cuatro condiciones.
 # Suspect/fondo = sesion A; delincuente (offender) = sesion B; la condicion cruzada usa formantes limpios en A y telefonicos en B.
 # Salida: resultados/mvkd_pares.csv (logLR por pareja, vocal y condicion). La fusion por vocal y las metricas se calculan en mvkd_evaluacion.py.
 # Uso: Rscript codigo/r/mvkd_formantes.R

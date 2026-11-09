@@ -1,4 +1,4 @@
-"""Apartado 4.5.2: evalua el MVKD (resultados de codigo/r/mvkd_formantes.R) y lo compara con la regresion logistica
+"""Apartado 4.5.1: evalua el MVKD (resultados de codigo/r/mvkd_formantes.R) y lo compara con la regresion logistica
 sobre los mismos 22 hablantes.
 - MVKD por vocal (logLR de fvclrr) -> fusion de las cinco vocales con regresion logistica, con leave-one-speaker-out.
 - Regresion logistica del trabajo (diferencias de formantes), restringida a los mismos hablantes.
