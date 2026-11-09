@@ -236,6 +236,7 @@ aparte y colocarlos en `datos/crudos/openslr72/` y `datos/crudos/openslr73/`.
    10. `codigo/python/ecapa_evaluacion.py` — evaluación de ECAPA-TDNN y comparación con la regresión logística y MVKD (apartado 4.5.2)
    11. `codigo/python/figura_violin_hablante.py` — gráficos de violín de F1–F4 de una mujer y de un hombre, en limpio y telefónico (apartado 4.4.1); el criterio de elección de los hablantes está explicado al inicio del programa
    12. `codigo/python/comprobaciones_ecapa.py` — comprobaciones adicionales de ECAPA-TDNN: número de grabaciones, intervalos de confianza por hablante y controles con identidades permutadas (apartado 4.5.2); parte de los embeddings guardados
+   13. `codigo/python/figura_ecapa_arquitectura.py` — diagrama simplificado de la arquitectura de ECAPA-TDNN con la configuración del modelo preentrenado (apartado 3.3.3); es un esquema, no ejecuta el modelo
 
 `codigo/python/segmentar_webmaus.py` documenta un intento de segmentación con el
 servicio WebMAUS (el mismo método del estudio de referencia), que falló por un error
