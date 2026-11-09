@@ -176,17 +176,31 @@ ax.set_xlabel("Falsas aceptaciones (%)"); ax.set_ylabel("Falsos rechazos (%)"); 
 ax.legend(fontsize=9); ax.spines[["top", "right"]].set_visible(False)
 fig.tight_layout(); fig.savefig(OUT / "figura_tres_sistemas_det_cruzado.png", dpi=200, bbox_inches="tight"); plt.close(fig)
 
-# distribucion de la similitud coseno de ECAPA
+# similitud coseno de cada pareja de sesiones (un punto por pareja), una condicion debajo de otra
 d = pd.DataFrame(det)
-fig, axs = plt.subplots(1, 3, figsize=(15, 4.2), sharey=True)
-for ax, (cond, nombre, _) in zip(axs, CONDS):
-    f = d[d.condicion == cond]
-    ax.hist(f[f.mismo == 0].coseno, bins=30, density=True, alpha=.6, color="#9e9ac8", label="hablantes distintos")
-    ax.hist(f[f.mismo == 1].coseno, bins=12, density=True, alpha=.7, color="#74c476", label="mismo hablante")
-    ax.set_title(nombre.replace("\n", " ")); ax.set_xlabel("Similitud coseno entre sesiones"); ax.spines[["top", "right"]].set_visible(False)
-axs[0].set_ylabel("Densidad"); axs[0].legend(fontsize=9)
-fig.suptitle("ECAPA-TDNN: distribución de la similitud entre parejas", y=1.0); fig.tight_layout()
-fig.savefig(OUT / "figura_ecapa_distribuciones.png", dpi=200, bbox_inches="tight"); plt.close(fig)
+TITULOS = {"limpio": "Limpio", "telefono": "Telefónico", "cruzado": "Cruzado (limpio frente a telefónico)"}
+C_DIST, C_MISMO = "#6a51a3", "#238b45"
+rng_puntos = np.random.default_rng(1)
+with plt.rc_context({"font.size": 10}):
+    fig, axs = plt.subplots(3, 1, figsize=(6.3, 5.1), sharex=True)
+    for ax, (cond, _, _) in zip(axs, CONDS):
+        f = d[d.condicion == cond]
+        dist = f[f.mismo == 0].coseno.to_numpy(); mis = f[f.mismo == 1].coseno.to_numpy()
+        ax.scatter(dist, 0 + rng_puntos.uniform(-.3, .3, len(dist)), s=11, color=C_DIST, alpha=.45, linewidths=0, zorder=2)
+        ax.scatter(mis, 1 + rng_puntos.uniform(-.3, .3, len(mis)), s=30, color=C_MISMO, alpha=.9, edgecolors="white", linewidths=.6, zorder=3)
+        ax.vlines(np.median(dist), -.4, .4, color=C_DIST, lw=2.6, zorder=4)   # mediana de cada grupo
+        ax.vlines(np.median(mis), .6, 1.4, color=C_MISMO, lw=2.6, zorder=4)
+        mn, mx = mis.min(), dist.max()   # menor similitud del mismo hablante y mayor de hablantes distintos
+        ax.axvline(mn, color=C_MISMO, lw=.9, ls=":", zorder=1); ax.axvline(mx, color=C_DIST, lw=.9, ls=":", zorder=1)
+        ax.set_title(TITULOS[cond], fontsize=11, loc="left", fontweight="bold")
+        ax.set_yticks([0, 1], [f"hablantes\ndistintos (n = {len(dist)})", f"mismo hablante\n(n = {len(mis)})"], fontsize=9)
+        ax.set_ylim(-.6, 1.6); ax.set_xlim(-.1, 1.05)
+        ax.text(.02, .96, f"mínimo del mismo hablante = {mn:.2f}\nmáximo de hablantes distintos = {mx:.2f}", transform=ax.transAxes, ha="left", va="top",
+                fontsize=8.5, color="#333333", bbox=dict(boxstyle="round,pad=0.3", fc="white", ec="#dddddd", lw=.6), zorder=5)
+        ax.spines[["top", "right"]].set_visible(False); ax.grid(axis="x", color="#e6e6e6", lw=.6, zorder=0); ax.tick_params(axis="x", labelsize=10)
+    axs[-1].set_xlabel("Similitud coseno entre sesiones", fontsize=11)
+    fig.tight_layout(h_pad=1.4)
+    fig.savefig(OUT / "figura_ecapa_distribuciones.png", dpi=300); plt.close(fig)
 print("Tablas y figuras guardadas en", OUT)
 
 # ---------- 5) comprobacion adicional: nivel de grabacion individual (sin promediar las 40 grabaciones de cada sesion)
