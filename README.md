@@ -244,6 +244,23 @@ del servidor en el 100 % de las peticiones. Se conserva por transparencia
 metodológica, pero no forma parte del pipeline final; su sustituto es
 `extraer_formantes.py`.
 
+### Otros scripts de análisis y generación de figuras
+
+Los siguientes programas son auxiliares: producen análisis o figuras que aparecen en la memoria
+y **no son pasos obligatorios** del pipeline anterior.
+
+| Programa | Descripción |
+|---|---|
+| `codigo/python/desglose_canal.py` | Diagnóstico del efecto del canal sobre los formantes: diferencia media entre dos sesiones (mismo hablante y hablantes distintos) y desplazamiento de F2 y F3 por vocal (apartado 4.4). |
+| `codigo/python/f0_sexo.py` | Efecto de añadir F0 al sistema, comparación entre hablantes del mismo sexo y clasificación del sexo (apartado 4.5.3). |
+| `codigo/python/figura_bayes.py` | Esquema de la relación entre probabilidades a priori, razón de verosimilitud y probabilidades a posteriori (apartado 3.2). |
+| `codigo/python/figura_cronograma.py` | Cronograma del trabajo por fases (apartado 4.1). |
+| `codigo/python/figura_diseno.py` | Esquema del diseño experimental, de los datos a las métricas (apartado 4.2). |
+| `codigo/python/figura_espectro_vocal.py` | Espectro de una vocal /a/ con su envolvente y los cuatro primeros formantes (apartado 3.1). |
+| `codigo/python/figura_formantes_banda.py` | Distribución de F1–F4 frente al límite de la banda telefónica y comparación del F4 en limpio y telefónico (apartado 3.4). |
+| `codigo/python/figura_intro.py` | La misma frase en limpio y telefónico simulado, con los formantes superpuestos (Introducción). |
+| `codigo/python/figura_resultados.py` | Cllr y Cllr_min por condición y curvas de Tippett (apartado 4.4). |
+
 ## Método
 
 Extracción de formantes (F1–F4) de las vocales /a/, /e/, /i/, /o/, /u/ mediante detección

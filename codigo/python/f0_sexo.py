@@ -1,4 +1,4 @@
-"""Apartado 4.5.4: efecto de anadir F0 al sistema y clasificacion del sexo del locutor.
+"""Apartado 4.5.3: efecto de anadir F0 al sistema y clasificacion del sexo del locutor.
 1) Sistema de comparacion (regresion logistica + leave-one-speaker-out) con F0 como rasgo adicional,
    en las cuatro condiciones de comparacion.
 2) Clasificacion del sexo por sesion (F0, formantes, ambos), con leave-one-speaker-out, en limpio y telefonico.
