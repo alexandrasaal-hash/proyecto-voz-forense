@@ -142,39 +142,48 @@ def scores_de(cond, cf, sist):
         d = punt[(punt.condicion == cf) & (punt.sistema == sist)]
     return d.score_logLR.to_numpy(), d.mismo.to_numpy().astype(int)
 
-# Tippett: una fila por condicion, tres sistemas
-fig, axs = plt.subplots(1, 3, figsize=(15, 4.6), sharey=True)
-for ax, (cond, nombre, cf) in zip(axs, CONDS):
-    for sist in (SIST_LR, SIST_MVKD, SIST_ECAPA):
-        s, lab = scores_de(cond, cf, sist)
-        l10 = s / np.log(10)
-        g = np.linspace(-6, 6, 400)
-        ax.plot(g, [(l10[lab == 1] >= t).mean() for t in g], color=COL[sist], lw=2)
-        ax.plot(g, [(l10[lab == 0] >= t).mean() for t in g], color=COL[sist], lw=2, ls="--")
-    ax.axvline(0, color="grey", lw=.8); ax.set_xlim(-6, 6); ax.set_ylim(0, 1)
-    ax.set_title(nombre.replace("\n", " ")); ax.set_xlabel("log10(LR)"); ax.spines[["top", "right"]].set_visible(False)
-axs[0].set_ylabel("Proporción de parejas con log10(LR) ≥ valor")
+# Tippett: una condicion por panel (cuadricula 2 x 2; el cuarto hueco es la leyenda). Se dibuja al tamaño al que se ve en la memoria
+# (16 cm de ancho) para que la letra sea legible.
 from matplotlib.lines import Line2D
-leg = [Line2D([0], [0], color=COL[s], lw=2, label=NOM[s].replace("\n", " ")) for s in (SIST_LR, SIST_MVKD, SIST_ECAPA)]
-leg += [Line2D([0], [0], color="k", lw=2, label="mismo hablante"), Line2D([0], [0], color="k", lw=2, ls="--", label="hablantes distintos")]
-fig.legend(handles=leg, loc="lower center", ncol=5, frameon=False, bbox_to_anchor=(.5, -.04))
-fig.suptitle("Curvas de Tippett de los tres sistemas", y=1.0); fig.tight_layout()
-fig.savefig(OUT / "figura_tres_sistemas_tippett.png", dpi=200, bbox_inches="tight"); plt.close(fig)
+with plt.rc_context({"font.size": 9}):
+    fig, axs = plt.subplots(2, 2, figsize=(6.3, 5.6), sharex=True, sharey=True)
+    af = axs.ravel()
+    for ax, (cond, nombre, cf) in zip(af[:3], CONDS):
+        for sist in (SIST_LR, SIST_MVKD, SIST_ECAPA):
+            s, lab = scores_de(cond, cf, sist)
+            l10 = s / np.log(10)
+            g = np.linspace(-6, 6, 400)
+            ax.plot(g, [(l10[lab == 1] >= t).mean() for t in g], color=COL[sist], lw=1.8)
+            ax.plot(g, [(l10[lab == 0] >= t).mean() for t in g], color=COL[sist], lw=1.8, ls="--")
+        ax.axvline(0, color="grey", lw=.8); ax.set_xlim(-6, 6); ax.set_ylim(0, 1)
+        ax.set_title(nombre.replace("\n", " "), fontsize=10, loc="left", fontweight="bold"); ax.spines[["top", "right"]].set_visible(False)
+    for ax in (axs[1, 0], axs[1, 1]):
+        ax.set_xlabel("log10(LR)")
+    axs[0, 1].tick_params(labelbottom=True); axs[0, 1].set_xlabel("log10(LR)")
+    for ax in (axs[0, 0], axs[1, 0]):
+        ax.set_ylabel("Proporción de parejas con\nlog10(LR) ≥ valor")
+    af[3].axis("off")
+    leg = [Line2D([0], [0], color=COL[s], lw=2, label=NOM[s].replace("\n", " ")) for s in (SIST_LR, SIST_MVKD, SIST_ECAPA)]
+    leg += [Line2D([0], [0], color="k", lw=2, label="mismo hablante"), Line2D([0], [0], color="k", lw=2, ls="--", label="hablantes distintos")]
+    af[3].legend(handles=leg, loc="center", frameon=False, fontsize=9, title="Curvas de Tippett", title_fontsize=10)
+    fig.tight_layout(h_pad=1.2)
+    fig.savefig(OUT / "figura_tres_sistemas_tippett.png", dpi=300); plt.close(fig)
 
-# DET en la condicion cruzada
-fig, ax = plt.subplots(figsize=(5.6, 5.6))
-for sist in (SIST_LR, SIST_MVKD, SIST_ECAPA):
-    s, lab = scores_de("cruzado", "cruzado_F123", sist)
-    fpr, tpr, _ = roc_curve(lab, s); fnr = 1 - tpr
-    m = (fpr > 0) & (fpr < 1) & (fnr > 0) & (fnr < 1)
-    ax.plot(norm.ppf(fpr[m]), norm.ppf(fnr[m]), color=COL[sist], lw=2, label=NOM[sist].replace("\n", " "))
-t = np.array([.01, .02, .05, .1, .2, .4, .6, .8, .95])
-ax.set_xticks(norm.ppf(t), [f"{100*v:g}" for v in t]); ax.set_yticks(norm.ppf(t), [f"{100*v:g}" for v in t])
-ax.set_xlim(norm.ppf(.01), norm.ppf(.95)); ax.set_ylim(norm.ppf(.01), norm.ppf(.95))
-ax.plot([-3, 3], [-3, 3], color="grey", lw=.8, ls=":")
-ax.set_xlabel("Falsas aceptaciones (%)"); ax.set_ylabel("Falsos rechazos (%)"); ax.set_title("Curvas DET, condición cruzada")
-ax.legend(fontsize=9); ax.spines[["top", "right"]].set_visible(False)
-fig.tight_layout(); fig.savefig(OUT / "figura_tres_sistemas_det_cruzado.png", dpi=200, bbox_inches="tight"); plt.close(fig)
+# DET en la condicion cruzada (dibujada a ~11 cm de ancho, tamaño al que se ve en la memoria)
+with plt.rc_context({"font.size": 9}):
+    fig, ax = plt.subplots(figsize=(4.4, 4.4))
+    for sist in (SIST_LR, SIST_MVKD, SIST_ECAPA):
+        s, lab = scores_de("cruzado", "cruzado_F123", sist)
+        fpr, tpr, _ = roc_curve(lab, s); fnr = 1 - tpr
+        m = (fpr > 0) & (fpr < 1) & (fnr > 0) & (fnr < 1)
+        ax.plot(norm.ppf(fpr[m]), norm.ppf(fnr[m]), color=COL[sist], lw=1.8, label=NOM[sist].replace("\n", " "))
+    t = np.array([.01, .02, .05, .1, .2, .4, .6, .8, .95])
+    ax.set_xticks(norm.ppf(t), [f"{100*v:g}" for v in t]); ax.set_yticks(norm.ppf(t), [f"{100*v:g}" for v in t])
+    ax.set_xlim(norm.ppf(.01), norm.ppf(.95)); ax.set_ylim(norm.ppf(.01), norm.ppf(.95))
+    ax.plot([-3, 3], [-3, 3], color="grey", lw=.8, ls=":")
+    ax.set_xlabel("Falsas aceptaciones (%)"); ax.set_ylabel("Falsos rechazos (%)"); ax.set_title("Curvas DET, condición cruzada", fontsize=10)
+    ax.legend(fontsize=8.5, loc="upper right"); ax.spines[["top", "right"]].set_visible(False)
+    fig.tight_layout(); fig.savefig(OUT / "figura_tres_sistemas_det_cruzado.png", dpi=300); plt.close(fig)
 
 # similitud coseno de cada pareja de sesiones (un punto por pareja), una condicion debajo de otra
 d = pd.DataFrame(det)
